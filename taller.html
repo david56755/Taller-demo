@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller Mecánico Pro</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--b:#0B4FD5;--bl:#1A6BFF;--bd:#0835A0;--bp:#EBF2FF;--w:#fff;--gl:#F4F7FC;--gr:#8A98B0;--dk:#0D1B2A;--or:#FF6B2B}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Barlow',sans-serif;background:var(--w);color:var(--dk);overflow-x:hidden}
+#loader{position:fixed;inset:0;background:var(--dk);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;transition:opacity .8s,visibility .8s}
+#loader.hide{opacity:0;visibility:hidden}
+.ld-gear{font-size:64px;color:var(--b);animation:spin 1.5s linear infinite}
+.ld-txt{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;color:var(--w);letter-spacing:4px;text-transform:uppercase}
+.ld-bar{width:220px;height:3px;background:rgba(255,255,255,.1);overflow:hidden;border-radius:3px}
+.ld-bar::after{content:'';display:block;height:100%;width:0;background:var(--b);animation:ldFill 1.8s ease forwards}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ldFill{to{width:100%}}
+nav{position:fixed;top:0;width:100%;z-index:100;background:var(--dk);padding:0 60px;height:68px;display:flex;justify-content:space-between;align-items:center;border-bottom:3px solid var(--b);transform:translateY(-100%);animation:navIn .6s .3s forwards}
+@keyframes navIn{to{transform:translateY(0)}}
+.logo{font-family:'Barlow Condensed',sans-serif;font-size:24px;font-weight:900;color:var(--w);letter-spacing:2px;text-transform:uppercase}
+.logo span{color:var(--bl)}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{color:rgba(255,255,255,.6);text-decoration:none;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;transition:color .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--bl);transition:width .3s}
+.nav-links a:hover{color:var(--w)}.nav-links a:hover::after{width:100%}
+.ncta{padding:10px 28px;background:var(--b);color:var(--w);text-decoration:none;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .2s;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%)}
+.ncta:hover{background:var(--bl)}
+
+/* HERO */
+.hero{min-height:100vh;background:var(--dk);display:flex;align-items:center;padding-top:68px;position:relative;overflow:hidden}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(11,79,213,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(11,79,213,.07) 1px,transparent 1px);background-size:60px 60px;animation:gridFade 2s ease forwards;opacity:0}
+@keyframes gridFade{to{opacity:1}}
+.hero-glow{position:absolute;width:700px;height:700px;background:radial-gradient(circle,rgba(11,79,213,.3) 0%,transparent 70%);top:50%;right:-100px;transform:translateY(-50%);animation:gPulse 4s ease-in-out infinite}
+@keyframes gPulse{0%,100%{opacity:.7;transform:translateY(-50%) scale(1)}50%{opacity:1;transform:translateY(-50%) scale(1.1)}}
+.scan-line{position:absolute;top:-10px;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,rgba(11,79,213,.6),transparent);animation:scanH 4s ease-in-out infinite}
+@keyframes scanH{0%{top:-10px;opacity:0}10%{opacity:1}90%{opacity:1}100%{top:calc(100% + 10px);opacity:0}}
+.hero-content{position:relative;z-index:1;padding:80px 60px}
+.h-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(11,79,213,.2);border:1px solid rgba(11,79,213,.4);padding:8px 20px;margin-bottom:32px;font-family:'Space Mono',monospace;font-size:11px;color:var(--bl);letter-spacing:2px;opacity:0;animation:fIn .8s .5s forwards}
+.h-badge::before{content:'';width:8px;height:8px;background:var(--bl);border-radius:50%;animation:blink 1.5s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(58px,9vw,110px);font-weight:900;line-height:.92;text-transform:uppercase;color:var(--w);letter-spacing:-2px}
+.line{display:block;overflow:hidden}
+.line span{display:block;transform:translateY(110%);animation:sU .8s ease forwards}
+.line:nth-child(1) span{animation-delay:.6s;color:var(--bl)}
+.line:nth-child(2) span{animation-delay:.75s}
+.line:nth-child(3) span{animation-delay:.9s;-webkit-text-stroke:2px rgba(255,255,255,.2);color:transparent}
+.h-desc{font-size:16px;color:rgba(255,255,255,.5);margin:28px 0 44px;max-width:480px;line-height:1.7;font-weight:300;opacity:0;animation:fIn .8s 1.1s forwards}
+.h-btns{display:flex;gap:14px;flex-wrap:wrap;opacity:0;animation:fIn .8s 1.3s forwards}
+.btn-p{display:inline-flex;align-items:center;gap:10px;padding:15px 36px;background:var(--b);color:var(--w);text-decoration:none;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .3s;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-p:hover{background:var(--bl);transform:translateY(-3px);box-shadow:0 12px 30px rgba(11,79,213,.4)}
+.btn-s{display:inline-flex;align-items:center;gap:10px;padding:15px 36px;border:2px solid rgba(255,255,255,.2);color:var(--w);text-decoration:none;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:all .3s}
+.btn-s:hover{border-color:var(--bl);color:var(--bl)}
+.h-stats{position:absolute;right:60px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:3px;opacity:0;animation:fIn .8s 1.5s forwards}
+.h-stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-left:3px solid var(--b);padding:22px 30px;min-width:170px;transition:all .3s}
+.h-stat:hover{background:rgba(11,79,213,.1);border-left-color:var(--bl);transform:translateX(-5px)}
+.h-stat strong{font-family:'Barlow Condensed',sans-serif;font-size:40px;font-weight:900;color:var(--w);line-height:1;display:block}
+.h-stat strong em{color:var(--bl);font-style:normal}
+.h-stat p{font-size:10px;color:var(--gr);letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+
+/* MARQUEE */
+.marquee{background:var(--b);padding:16px 0;overflow:hidden}
+.marquee-t{display:flex;gap:50px;animation:mar 20s linear infinite;white-space:nowrap}
+.marquee-t span{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;color:var(--w);letter-spacing:2px;text-transform:uppercase;flex-shrink:0;display:flex;align-items:center;gap:12px}
+.marquee-t .dot{width:6px;height:6px;background:rgba(255,255,255,.4);border-radius:50%}
+@keyframes mar{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* REVEAL */
+section{padding:100px 60px}
+.rev{opacity:0;transform:translateY(40px);transition:opacity .7s,transform .7s}
+.rev.on{opacity:1;transform:translateY(0)}
+.rev-l{opacity:0;transform:translateX(-50px);transition:opacity .8s,transform .8s}
+.rev-l.on{opacity:1;transform:translateX(0)}
+.rev-r{opacity:0;transform:translateX(50px);transition:opacity .8s,transform .8s}
+.rev-r.on{opacity:1;transform:translateX(0)}
+.tag{font-family:'Space Mono',monospace;font-size:11px;color:var(--b);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.tag::before{content:'//';color:var(--or)}
+.s-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(34px,5vw,56px);font-weight:900;text-transform:uppercase;line-height:1;letter-spacing:-1px}
+.s-title .bl{color:var(--b)}
+
+/* SERVICIOS */
+#servicios{background:var(--gl)}
+.svcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:60px}
+.svc{background:var(--w);border-top:4px solid transparent;padding:40px 32px;transition:all .4s;position:relative;box-shadow:0 2px 20px rgba(0,0,0,.06);overflow:hidden;cursor:pointer}
+.svc::before{content:'';position:absolute;bottom:0;left:0;width:0;height:3px;background:linear-gradient(90deg,var(--b),var(--bl));transition:width .5s}
+.svc:hover{border-top-color:var(--b);transform:translateY(-8px);box-shadow:0 20px 50px rgba(11,79,213,.15)}
+.svc:hover::before{width:100%}
+.svc-tag{font-family:'Space Mono',monospace;font-size:10px;color:var(--b);margin-bottom:16px;opacity:.6}
+.svc-ico{width:54px;height:54px;background:var(--bp);display:flex;align-items:center;justify-content:center;margin-bottom:18px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:all .4s}
+.svc:hover .svc-ico{background:var(--b)}
+.svc-ico i{font-size:22px;color:var(--b);transition:color .4s}
+.svc:hover .svc-ico i{color:var(--w)}
+.svc h3{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.svc p{font-size:14px;color:var(--gr);line-height:1.7;margin-bottom:18px}
+.svc-price{display:inline-block;background:var(--bp);color:var(--b);padding:6px 14px;font-family:'Space Mono',monospace;font-size:13px;font-weight:700;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:all .4s}
+.svc:hover .svc-price{background:var(--b);color:var(--w)}
+
+/* PROCESO */
+#proceso{background:var(--dk);position:relative;overflow:hidden}
+#proceso::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(11,79,213,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(11,79,213,.05) 1px,transparent 1px);background-size:40px 40px}
+#proceso .s-title{color:var(--w)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-top:60px}
+.steps::before{content:'';position:absolute;top:32px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--b),var(--bl),var(--b),transparent);z-index:0}
+.step{text-align:center;padding:0 20px;position:relative;z-index:1;transition:transform .3s}
+.step:hover{transform:translateY(-6px)}
+.step-n{width:64px;height:64px;background:var(--dk);border:2px solid var(--b);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-family:'Barlow Condensed',sans-serif;font-size:26px;font-weight:900;color:var(--b);clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .4s;cursor:default}
+.step:hover .step-n{background:var(--b);color:var(--w);box-shadow:0 0 30px rgba(11,79,213,.5)}
+.step h4{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:800;text-transform:uppercase;color:var(--w);letter-spacing:1px;margin-bottom:10px;transition:color .3s}
+.step:hover h4{color:var(--bl)}
+.step p{font-size:13px;color:var(--gr);line-height:1.7}
+
+/* PORQUE */
+#porque{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0}
+.pq-vis{background:var(--b);padding:100px 80px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.pq-vis::before{content:'';position:absolute;width:500px;height:500px;border:80px solid rgba(255,255,255,.05);border-radius:50%;top:-150px;right:-150px;animation:rotCirc 15s linear infinite}
+.pq-vis::after{content:'';position:absolute;width:250px;height:250px;border:50px solid rgba(255,255,255,.05);border-radius:50%;bottom:-80px;left:-80px;animation:rotCirc 10s linear infinite reverse}
+@keyframes rotCirc{to{transform:rotate(360deg)}}
+.pq-vis h2{font-family:'Barlow Condensed',sans-serif;font-size:56px;font-weight:900;color:var(--w);text-transform:uppercase;line-height:1;letter-spacing:-1px;position:relative;z-index:1}
+.pq-vis p{color:rgba(255,255,255,.75);font-size:16px;line-height:1.8;margin-top:20px;position:relative;z-index:1}
+.pq-num{font-family:'Barlow Condensed',sans-serif;font-size:160px;font-weight:900;color:rgba(255,255,255,.07);position:absolute;bottom:20px;right:30px;line-height:1;z-index:0}
+.counter-stat{font-family:'Barlow Condensed',sans-serif;font-size:64px;font-weight:900;color:var(--w);display:flex;align-items:center;gap:12px;margin-top:32px;position:relative;z-index:1}
+.counter-stat span{font-size:18px;color:rgba(255,255,255,.6);font-family:'Barlow',sans-serif;font-weight:400}
+.pq-list{padding:100px 80px;background:var(--gl);display:flex;flex-direction:column;justify-content:center}
+.pq-item{display:flex;gap:20px;padding:28px 0;border-bottom:1px solid rgba(0,0,0,.07);transition:all .3s;cursor:default}
+.pq-item:last-child{border-bottom:none}
+.pq-item:hover{transform:translateX(8px)}
+.pq-ico{width:50px;height:50px;background:var(--b);flex-shrink:0;display:flex;align-items:center;justify-content:center;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);transition:all .4s}
+.pq-item:hover .pq-ico{background:var(--bl);box-shadow:0 8px 20px rgba(11,79,213,.3)}
+.pq-ico i{color:var(--w);font-size:18px}
+.pq-item h4{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.pq-item p{font-size:13px;color:var(--gr);line-height:1.7}
+
+/* CONTACTO */
+#contacto{background:var(--dk);position:relative;overflow:hidden}
+#contacto::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(11,79,213,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(11,79,213,.05) 1px,transparent 1px);background-size:50px 50px}
+#contacto .s-title{color:var(--w)}
+.c-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:60px;position:relative;z-index:1}
+.c-items{display:flex;flex-direction:column;gap:20px}
+.ci{display:flex;align-items:flex-start;gap:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);padding:24px;transition:all .3s}
+.ci:hover{background:rgba(11,79,213,.1);border-color:rgba(11,79,213,.3);transform:translateY(-3px)}
+.ci-ico{width:46px;height:46px;background:rgba(11,79,213,.2);border:1px solid rgba(11,79,213,.4);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .4s}
+.ci:hover .ci-ico{background:var(--b);border-color:var(--b)}
+.ci-ico i{color:var(--bl);font-size:16px;transition:color .4s}
+.ci:hover .ci-ico i{color:var(--w)}
+.ci p{font-size:10px;color:var(--gr);letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+.ci strong{color:var(--w);font-size:15px}
+.btn-wa{display:inline-flex;align-items:center;gap:12px;margin-top:28px;padding:18px 40px;background:#25D366;color:var(--w);text-decoration:none;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .3s;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.btn-wa:hover{background:#1fba58;transform:translateY(-3px);box-shadow:0 12px 30px rgba(37,211,102,.4)}
+.c-map{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;min-height:280px;flex-direction:column;gap:16px;transition:all .3s}
+.c-map:hover{background:rgba(11,79,213,.08);border-color:rgba(11,79,213,.3)}
+.c-map i{font-size:52px;color:rgba(11,79,213,.3);transition:color .3s}
+.c-map:hover i{color:rgba(11,79,213,.6)}
+.c-map p{color:var(--gr);font-size:12px;letter-spacing:2px}
+footer{background:#060F18;border-top:3px solid var(--b);padding:36px 60px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.f-logo{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:var(--w);text-transform:uppercase;letter-spacing:2px}
+.f-logo span{color:var(--bl)}
+footer p{font-size:12px;color:var(--gr)}
+.soc{display:flex;gap:10px}
+.soc a{width:36px;height:36px;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;color:var(--gr);text-decoration:none;font-size:14px;transition:all .2s;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%)}
+.soc a:hover{background:var(--b);color:var(--w);border-color:var(--b);transform:translateY(-3px)}
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-links,.ncta,.h-stats{display:none}
+  .hero-content{padding:100px 24px 60px}
+  section{padding:70px 24px}
+  #porque{grid-template-columns:1fr}
+  .pq-vis,.pq-list{padding:60px 24px}
+  .steps{grid-template-columns:1fr 1fr;gap:40px}
+  .steps::before{display:none}
+  .c-grid{grid-template-columns:1fr}
+  footer{padding:28px 20px;flex-direction:column;text-align:center}
+}
+@keyframes fIn{to{opacity:1}}@keyframes sU{to{transform:translateY(0)}}
+</style>
+</head>
+<body>
+<div id="loader"><svg width="480" height="320" viewBox="0 0 680 400" style="animation:ldFadeIn 1s ease forwards">
+<style>
+.gear{animation:spin 8s linear infinite;transform-origin:340px 175px}
+.gear2{animation:spin 8s linear infinite reverse;transform-origin:340px 175px}
+.pulse{animation:ldPulse 2s ease-in-out infinite}
+.fadeIn{animation:ldFI 1.5s ease forwards}
+.slideUp{animation:ldSU 1s ease forwards}
+.slideUp2{animation:ldSU 1.2s ease forwards}
+.dot1{animation:ldDP 2s ease-in-out infinite}
+.dot2{animation:ldDP 2s .4s ease-in-out infinite}
+.dot3{animation:ldDP 2s .8s ease-in-out infinite}
+.dot4{animation:ldDP 2s 1.2s ease-in-out infinite}
+.line1{animation:ldLG 1s .5s ease forwards}
+.line2{animation:ldLG 1s .7s ease forwards}
+.glow{animation:ldGP 3s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes ldPulse{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes ldFI{from{opacity:0}to{opacity:1}}
+@keyframes ldSU{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ldDP{0%,100%{opacity:.4}50%{opacity:1}}
+@keyframes ldLG{from{stroke-dashoffset:120;opacity:0}to{stroke-dashoffset:0;opacity:1}}
+@keyframes ldGP{0%,100%{opacity:.15}50%{opacity:.35}}
+@keyframes ldFadeIn{from{opacity:0}to{opacity:1}}
+</style>
+<rect width="680" height="400" fill="#0D1B2A"/>
+<circle cx="340" cy="175" r="130" fill="#0B4FD5" class="glow"/>
+<line x1="0" y1="175" x2="680" y2="175" stroke="#0B4FD5" stroke-width="0.5" opacity="0.2"/>
+<line x1="340" y1="0" x2="340" y2="400" stroke="#0B4FD5" stroke-width="0.5" opacity="0.2"/>
+<g class="gear">
+  <rect x="328" y="80" width="24" height="22" rx="4" fill="#0B4FD5"/>
+  <rect x="328" y="248" width="24" height="22" rx="4" fill="#0B4FD5"/>
+  <rect x="248" y="163" width="22" height="24" rx="4" fill="#0B4FD5"/>
+  <rect x="410" y="163" width="22" height="24" rx="4" fill="#0B4FD5"/>
+  <g transform="rotate(45,340,175)">
+    <rect x="328" y="80" width="24" height="22" rx="4" fill="#0B4FD5"/>
+    <rect x="328" y="248" width="24" height="22" rx="4" fill="#0B4FD5"/>
+    <rect x="248" y="163" width="22" height="24" rx="4" fill="#0B4FD5"/>
+    <rect x="410" y="163" width="22" height="24" rx="4" fill="#0B4FD5"/>
+  </g>
+  <circle cx="340" cy="175" r="72" fill="#111D2B" stroke="#0B4FD5" stroke-width="3"/>
+</g>
+<g class="gear2"><circle cx="340" cy="175" r="52" fill="none" stroke="#1A6BFF" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/></g>
+<circle cx="340" cy="175" r="40" fill="#0D1B2A" stroke="#1A6BFF" stroke-width="2"/>
+<text x="340" y="187" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="32" font-weight="900" fill="#1A6BFF" letter-spacing="2" class="pulse">JG</text>
+<line x1="235" y1="175" x2="120" y2="175" stroke="#0B4FD5" stroke-width="1.5" stroke-dasharray="120" class="line1"/>
+<line x1="445" y1="175" x2="560" y2="175" stroke="#0B4FD5" stroke-width="1.5" stroke-dasharray="120" class="line2"/>
+<g transform="translate(175,175) rotate(-90)" class="fadeIn"><rect x="-5" y="-45" width="10" height="55" rx="3" fill="#8A98B0"/><rect x="-11" y="-48" width="22" height="14" rx="4" fill="#8A98B0"/><rect x="-7" y="-56" width="7" height="10" rx="2" fill="#8A98B0"/><rect x="0" y="-56" width="7" height="10" rx="2" fill="#8A98B0"/></g>
+<g transform="translate(505,175) rotate(90)" class="fadeIn"><rect x="-5" y="-45" width="10" height="55" rx="3" fill="#8A98B0"/><rect x="-8" y="-52" width="16" height="16" rx="3" fill="#6A7888"/><rect x="-3" y="10" width="6" height="12" rx="1" fill="#FF6B2B"/></g>
+<text x="340" y="295" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="26" font-weight="900" fill="#FFFFFF" letter-spacing="5" class="slideUp">AUTO SERVICE</text>
+<rect x="220" y="308" width="240" height="2" rx="1" fill="#1A6BFF" class="fadeIn"/>
+<text x="340" y="330" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#8A98B0" letter-spacing="4" class="slideUp2">JG MECÁNICA PROFESIONAL</text>
+<circle cx="205" cy="327" r="3" fill="#FF6B2B" class="dot1"/>
+<circle cx="225" cy="327" r="3" fill="#0B4FD5" class="dot2"/>
+<circle cx="455" cy="327" r="3" fill="#0B4FD5" class="dot3"/>
+<circle cx="475" cy="327" r="3" fill="#FF6B2B" class="dot4"/>
+<circle r="4" fill="#FF6B2B" opacity="0.8"><animateMotion dur="4s" repeatCount="indefinite"><mpath xlink:href="#orbit2"/></animateMotion></circle>
+<circle r="3" fill="#1A6BFF" opacity="0.6"><animateMotion dur="4s" begin="-2s" repeatCount="indefinite"><mpath xlink:href="#orbit2"/></animateMotion></circle>
+<path id="orbit2" d="M340,95 A80,80 0 1,1 339.9,95" fill="none"/>
+</svg></div>
+
+<nav>
+  <div class="logo">Taller <span>Pro</span></div>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#porque">¿Por qué?</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://wa.me/5215530207385" class="ncta">Cotizar</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="scan-line"></div>
+  <div class="hero-content">
+    <div class="h-badge">Taller Certificado — Naucalpan</div>
+    <h1>
+      <div class="line"><span>Tu Auto</span></div>
+      <div class="line"><span>Merece</span></div>
+      <div class="line"><span>lo Mejor</span></div>
+    </h1>
+    <p class="h-desc">Mecánica general, diagnóstico profesional y mantenimiento preventivo. Precios honestos y garantía en cada servicio.</p>
+    <div class="h-btns">
+      <a href="https://wa.me/5215530207385" class="btn-p"><i class="fas fa-wrench"></i>Cotizar gratis</a>
+      <a href="#servicios" class="btn-s"><i class="fas fa-chevron-down"></i>Ver servicios</a>
+    </div>
+  </div>
+  <div class="h-stats">
+    <div class="h-stat"><strong><span data-t="10">0</span><em>+</em></strong><p>Años de exp.</p></div>
+    <div class="h-stat"><strong><span data-t="500">0</span><em>+</em></strong><p>Autos reparados</p></div>
+    <div class="h-stat"><strong><span data-t="100">0</span><em>%</em></strong><p>Garantía</p></div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-t">
+    <span><i class="fas fa-wrench"></i>Mecánica General</span><span class="dot"></span>
+    <span><i class="fas fa-car-battery"></i>Sistema Eléctrico</span><span class="dot"></span>
+    <span><i class="fas fa-oil-can"></i>Cambio de Aceite</span><span class="dot"></span>
+    <span><i class="fas fa-circle-notch"></i>Frenos y Balatas</span><span class="dot"></span>
+    <span><i class="fas fa-cogs"></i>Afinación</span><span class="dot"></span>
+    <span><i class="fas fa-wrench"></i>Mecánica General</span><span class="dot"></span>
+    <span><i class="fas fa-car-battery"></i>Sistema Eléctrico</span><span class="dot"></span>
+    <span><i class="fas fa-oil-can"></i>Cambio de Aceite</span><span class="dot"></span>
+    <span><i class="fas fa-circle-notch"></i>Frenos y Balatas</span><span class="dot"></span>
+    <span><i class="fas fa-cogs"></i>Afinación</span><span class="dot"></span>
+  </div>
+</div>
+
+<section id="servicios">
+  <div class="rev"><div class="tag">Lo que hacemos</div><h2 class="s-title">Nuestros <span class="bl">Servicios</span></h2></div>
+  <div class="svcs">
+    <div class="svc rev"><div class="svc-tag">01</div><div class="svc-ico"><i class="fas fa-oil-can"></i></div><h3>Cambio de Aceite</h3><p>Cambio de aceite y filtro. Revisión general incluida sin costo.</p><div class="svc-price">Desde $350</div></div>
+    <div class="svc rev" style="transition-delay:.1s"><div class="svc-tag">02</div><div class="svc-ico"><i class="fas fa-circle-notch"></i></div><h3>Frenos y Balatas</h3><p>Revisión, ajuste y cambio de frenos con garantía.</p><div class="svc-price">Desde $600</div></div>
+    <div class="svc rev" style="transition-delay:.2s"><div class="svc-tag">03</div><div class="svc-ico"><i class="fas fa-car-battery"></i></div><h3>Sistema Eléctrico</h3><p>Diagnóstico y reparación de fallas eléctricas completas.</p><div class="svc-price">Desde $400</div></div>
+    <div class="svc rev" style="transition-delay:.3s"><div class="svc-tag">04</div><div class="svc-ico"><i class="fas fa-cogs"></i></div><h3>Afinación</h3><p>Afinación mayor y menor, bujías y sistemas de encendido.</p><div class="svc-price">Desde $800</div></div>
+    <div class="svc rev" style="transition-delay:.4s"><div class="svc-tag">05</div><div class="svc-ico"><i class="fas fa-car-crash"></i></div><h3>Suspensión</h3><p>Reparación de amortiguadores, muelles y componentes.</p><div class="svc-price">Desde $900</div></div>
+    <div class="svc rev" style="transition-delay:.5s"><div class="svc-tag">06</div><div class="svc-ico"><i class="fas fa-thermometer-half"></i></div><h3>Enfriamiento</h3><p>Radiador, bomba de agua, termostato y mangueras.</p><div class="svc-price">Desde $500</div></div>
+  </div>
+</section>
+
+<section id="proceso">
+  <div class="rev" style="position:relative;z-index:1"><div class="tag" style="color:var(--bl)">Cómo trabajamos</div><h2 class="s-title" style="color:var(--w)">Nuestro <span style="color:var(--bl)">Proceso</span></h2></div>
+  <div class="steps">
+    <div class="step rev"><div class="step-n">01</div><h4>Diagnóstico</h4><p>Revisión completa de tu vehículo para detectar fallas con precisión.</p></div>
+    <div class="step rev" style="transition-delay:.15s"><div class="step-n">02</div><h4>Cotización</h4><p>Presupuesto claro y sin sorpresas antes de empezar.</p></div>
+    <div class="step rev" style="transition-delay:.3s"><div class="step-n">03</div><h4>Reparación</h4><p>Trabajamos con refacciones de calidad y técnicos certificados.</p></div>
+    <div class="step rev" style="transition-delay:.45s"><div class="step-n">04</div><h4>Entrega</h4><p>Tu auto con garantía y reporte completo de todo lo realizado.</p></div>
+  </div>
+</section>
+
+<section id="porque" style="padding:0">
+  <div class="pq-vis rev-l">
+    <h2>¿Por qué<br>elegirnos?</h2>
+    <p>Más de 10 años de experiencia nos respaldan. Honestidad, calidad y compromiso en cada servicio.</p>
+    <div class="counter-stat"><span data-t="10" class="ct-n">0</span><em style="color:var(--bl);font-style:normal">+</em><span>años confiando en nosotros</span></div>
+    <div class="pq-num">10</div>
+  </div>
+  <div class="pq-list rev-r">
+    <div class="tag" style="margin-bottom:40px">Nuestras ventajas</div>
+    <h2 class="s-title" style="margin-bottom:40px">Lo que nos <span class="bl">diferencia</span></h2>
+    <div class="pq-item"><div class="pq-ico"><i class="fas fa-shield-alt"></i></div><div><h4>Garantía en todo</h4><p>Respaldamos nuestro trabajo. Si algo falla, lo corregimos sin costo.</p></div></div>
+    <div class="pq-item"><div class="pq-ico"><i class="fas fa-dollar-sign"></i></div><div><h4>Precios honestos</h4><p>Sin cargos ocultos. Cotizamos antes y respetamos el precio.</p></div></div>
+    <div class="pq-item"><div class="pq-ico"><i class="fas fa-clock"></i></div><div><h4>Entrega a tiempo</h4><p>Respetamos los tiempos prometidos. Tu tiempo es valioso.</p></div></div>
+    <div class="pq-item"><div class="pq-ico"><i class="fas fa-tools"></i></div><div><h4>Refacciones de calidad</h4><p>Solo originales o de primera calidad en cada reparación.</p></div></div>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="rev" style="position:relative;z-index:1"><div class="tag" style="color:var(--bl)">Encuéntranos</div><h2 class="s-title">Contacto y <span style="color:var(--bl)">Ubicación</span></h2></div>
+  <div class="c-grid">
+    <div class="c-items">
+      <div class="ci rev"><div class="ci-ico"><i class="fas fa-map-marker-alt"></i></div><div><p>Dirección</p><strong>Calle Ejemplo #456, Naucalpan, Edo. México</strong></div></div>
+      <div class="ci rev" style="transition-delay:.1s"><div class="ci-ico"><i class="fas fa-clock"></i></div><div><p>Horario</p><strong>Lun–Vie 8am–7pm · Sáb 8am–3pm</strong></div></div>
+      <div class="ci rev" style="transition-delay:.2s"><div class="ci-ico"><i class="fas fa-phone"></i></div><div><p>Teléfono</p><strong>55 XXXX XXXX</strong></div></div>
+      <a href="https://wa.me/5215530207385" class="btn-wa rev" style="transition-delay:.3s"><i class="fab fa-whatsapp" style="font-size:18px"></i>Cotizar por WhatsApp</a>
+    </div>
+    <div class="c-map rev-r"><i class="fas fa-map-marked-alt"></i><p>— Agrega Google Maps aquí —</p></div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section style="background:var(--gl);padding:100px 60px">
+  <div class="rev"><div class="tag">Lo que dicen</div><h2 class="s-title">Clientes <span class="bl">Satisfechos</span></h2></div>
+  <div class="test-wrap rev">
+    <div class="test-slider">
+      <div class="tc active"><div class="tc-stars">★★★★★</div><p>"Llevé mi carro con falla en frenos y lo entregaron el mismo día. El precio fue exactamente el que cotizaron. Sin sorpresas."</p><div class="tc-author"><div class="tc-av">RM</div><div><strong>Roberto M.</strong><span>Frenos y Balatas</span></div></div></div>
+      <div class="tc"><div class="tc-stars">★★★★★</div><p>"La afinación que le hicieron a mi Focus fue excelente. Noté la diferencia desde el primer día. Ya llevo 3 años siendo cliente."</p><div class="tc-author"><div class="tc-av" style="background:#FF6B2B">LP</div><div><strong>Laura P.</strong><span>Afinación</span></div></div></div>
+      <div class="tc"><div class="tc-stars">★★★★★</div><p>"El diagnóstico fue gratuito y muy completo. Me explicaron todo con detalle antes de cobrar. Eso vale mucho."</p><div class="tc-author"><div class="tc-av" style="background:#1E8449">AG</div><div><strong>Alejandro G.</strong><span>Diagnóstico</span></div></div></div>
+    </div>
+    <div class="tc-dots"><span class="tcd active" onclick="tcGo(0)"></span><span class="tcd" onclick="tcGo(1)"></span><span class="tcd" onclick="tcGo(2)"></span></div>
+    <button class="tc-prev" onclick="tcChange(-1)"><i class="fas fa-chevron-left"></i></button>
+    <button class="tc-next" onclick="tcChange(1)"><i class="fas fa-chevron-right"></i></button>
+  </div>
+</section>
+
+<!-- DIAGNÓSTICO RÁPIDO -->
+<section id="diagnostico" style="background:var(--dk);padding:100px 60px;position:relative;overflow:hidden">
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(11,79,213,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(11,79,213,.05) 1px,transparent 1px);background-size:50px 50px"></div>
+  <div style="position:relative;z-index:1;max-width:700px;margin:0 auto;text-align:center">
+    <div class="rev">
+      <div class="tag" style="color:var(--bl);justify-content:center">Cuéntanos</div>
+      <h2 class="s-title" style="color:var(--w)">Diagnóstico <span style="color:var(--bl)">Rápido</span></h2>
+      <p style="color:rgba(255,255,255,.5);font-size:16px;margin:16px 0 12px;line-height:1.7">Selecciona <strong style="color:var(--bl)">una o varias fallas</strong> de tu auto y te contactamos con la solución</p>
+      <p style="color:rgba(255,255,255,.3);font-size:13px;margin-bottom:40px">Puedes seleccionar múltiples problemas</p>
+    </div>
+    <div class="diag-grid rev">
+      <div class="diag-opt" data-name="Fuga de aceite" onclick="selectDiag(this)"><i class="fas fa-oil-can"></i><span>Fuga de aceite</span></div>
+      <div class="diag-opt" data-name="Sobrecalentamiento" onclick="selectDiag(this)"><i class="fas fa-thermometer-full"></i><span>Sobrecalentamiento</span></div>
+      <div class="diag-opt" data-name="Ruido al frenar" onclick="selectDiag(this)"><i class="fas fa-circle-notch"></i><span>Ruido al frenar</span></div>
+      <div class="diag-opt" data-name="No enciende" onclick="selectDiag(this)"><i class="fas fa-car-battery"></i><span>No enciende</span></div>
+      <div class="diag-opt" data-name="Luz de check encendida" onclick="selectDiag(this)"><i class="fas fa-exclamation-triangle"></i><span>Check encendida</span></div>
+      <div class="diag-opt" data-name="Vibraciones al manejar" onclick="selectDiag(this)"><i class="fas fa-car-crash"></i><span>Vibraciones</span></div>
+      <div class="diag-opt" data-name="Falla en transmisión" onclick="selectDiag(this)"><i class="fas fa-cogs"></i><span>Falla transmisión</span></div>
+      <div class="diag-opt" data-name="Humo del motor" onclick="selectDiag(this)"><i class="fas fa-smog"></i><span>Humo del motor</span></div>
+      <div class="diag-opt" data-name="Consumo excesivo de gasolina" onclick="selectDiag(this)"><i class="fas fa-gas-pump"></i><span>Mucho gasto de gasolina</span></div>
+      <div class="diag-opt" data-name="Suspensión dañada" onclick="selectDiag(this)"><i class="fas fa-road"></i><span>Suspensión</span></div>
+      <div class="diag-opt" data-name="Fuga de líquido de frenos" onclick="selectDiag(this)"><i class="fas fa-tint"></i><span>Fuga de frenos</span></div>
+      <div class="diag-opt" data-name="Otro problema" onclick="selectDiag(this)"><i class="fas fa-question-circle"></i><span>Otro problema</span></div>
+    </div>
+    <div class="diag-counter" id="diagCounter"></div>
+    <a href="#" class="diag-btn" id="diagBtn" style="pointer-events:none;opacity:.4"><i class="fab fa-whatsapp"></i>Enviar diagnóstico por WhatsApp</a>
+  </div>
+</section>
+
+<!-- BOTÓN WA FLOTANTE -->
+<div class="wa-float"><div class="wa-tip">💬 ¡Cotización gratis!</div><a href="https://wa.me/5215530207385?text=Hola!%20Necesito%20una%20cotizaci%C3%B3n%20para%20mi%20auto" target="_blank" class="wa-btn-f"><i class="fab fa-whatsapp"></i><span class="wa-ring"></span></a></div>
+
+<!-- STATUS BAR -->
+<div class="status-bar" id="statusBar"></div>
+
+<style>
+.test-wrap{position:relative;max-width:800px;margin:40px auto 0;padding:0 56px}
+.test-slider{overflow:hidden}
+.tc{display:none;background:var(--w);padding:44px;border-top:4px solid var(--b);box-shadow:0 4px 24px rgba(0,0,0,.07);opacity:0;transform:translateX(30px);transition:all .5s}
+.tc.active{display:block;opacity:1;transform:translateX(0)}
+.tc-stars{color:var(--b);font-size:18px;letter-spacing:3px;margin-bottom:16px}
+.tc p{font-size:17px;color:var(--gr);line-height:1.8;margin-bottom:24px;font-style:italic}
+.tc-author{display:flex;align-items:center;gap:14px}
+.tc-av{width:46px;height:46px;border-radius:50%;background:var(--b);display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--w);font-size:13px}
+.tc-author strong{display:block;font-size:15px}.tc-author span{font-size:11px;color:var(--gr);letter-spacing:1px}
+.tc-dots{display:flex;justify-content:center;gap:8px;margin-top:24px}
+.tcd{width:8px;height:8px;border-radius:50%;background:rgba(11,79,213,.2);cursor:pointer;border:none;transition:all .3s}
+.tcd.active{background:var(--b);width:24px;border-radius:4px}
+.tc-prev,.tc-next{position:absolute;top:44px;background:var(--w);border:2px solid rgba(11,79,213,.2);color:var(--b);width:44px;height:44px;cursor:pointer;font-size:16px;transition:all .3s;display:flex;align-items:center;justify-content:center;clip-path:polygon(4px 0%,100% 0%,calc(100% - 4px) 100%,0% 100%)}
+.tc-prev{left:0}.tc-next{right:0}
+.tc-prev:hover,.tc-next:hover{background:var(--b);color:var(--w);border-color:var(--b)}
+.diag-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+.diag-opt{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:20px 14px;cursor:pointer;transition:all .3s;display:flex;flex-direction:column;align-items:center;gap:10px;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);position:relative;user-select:none}
+.diag-opt i{font-size:24px;color:rgba(255,255,255,.4);transition:color .3s}
+.diag-opt span{font-size:12px;color:rgba(255,255,255,.5);font-weight:600;transition:color .3s;text-align:center}
+.diag-opt:hover{background:rgba(11,79,213,.15);border-color:rgba(11,79,213,.4)}
+.diag-opt:hover i{color:var(--bl)}.diag-opt:hover span{color:var(--w)}
+.diag-opt.sel{background:rgba(11,79,213,.25);border-color:var(--bl);box-shadow:0 0 16px rgba(11,79,213,.3)}
+.diag-opt.sel i{color:var(--bl)}.diag-opt.sel span{color:var(--w)}
+.diag-opt.sel::after{content:'✓';position:absolute;top:6px;right:8px;color:var(--bl);font-size:13px;font-weight:900}
+.diag-counter{min-height:28px;margin-bottom:24px;font-size:13px;color:var(--bl);font-weight:700;letter-spacing:1px}
+.diag-btn{display:inline-flex;align-items:center;gap:12px;padding:18px 40px;background:#25D366;color:var(--w);text-decoration:none;font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:all .3s;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%)}
+.diag-btn:hover{background:#1fba58;transform:translateY(-3px);box-shadow:0 12px 30px rgba(37,211,102,.4)}
+.wa-float{position:fixed;bottom:32px;right:32px;z-index:999;display:flex;flex-direction:column;align-items:center;gap:8px}
+.wa-tip{background:var(--dk);color:var(--w);font-size:12px;font-weight:700;padding:8px 14px;border:1px solid rgba(11,79,213,.3);white-space:nowrap;opacity:0;transform:translateY(4px);transition:all .3s;pointer-events:none;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.wa-float:hover .wa-tip{opacity:1;transform:translateY(0)}
+.wa-btn-f{width:68px;height:68px;background:linear-gradient(135deg,#25D366,#128C7E);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--w);font-size:32px;text-decoration:none;box-shadow:0 6px 24px rgba(37,211,102,.5);transition:all .3s;position:relative;border:3px solid rgba(255,255,255,.3)}
+.wa-btn-f:hover{transform:scale(1.1)}
+.wa-ring{position:absolute;width:100%;height:100%;border-radius:50%;background:#25D366;animation:ring 2s ease-out infinite;z-index:-1}
+@keyframes ring{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.8);opacity:0}}
+.status-bar{position:fixed;top:68px;left:50%;transform:translateX(-50%);padding:8px 24px;font-size:12px;font-weight:700;letter-spacing:1px;z-index:99;transition:all .4s;display:flex;align-items:center;gap:8px;clip-path:polygon(0% 0%,100% 0%,100% 100%,10px 100%,0% 80%);opacity:0;animation:sbIn .5s 2.5s forwards}
+.status-bar.open{background:var(--b);color:var(--w)}
+.status-bar.closed{background:#C0392B;color:var(--w)}
+.sdot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.8);animation:blink 1.5s ease-in-out infinite}
+@keyframes sbIn{to{opacity:1}}
+</style>
+<footer>
+  <div class="f-logo">Taller <span>Pro</span></div>
+  <p>© 2026 Taller Mecánico Pro — Naucalpan, Edo. México</p>
+  <div class="soc"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-whatsapp"></i></a></div>
+</footer>
+
+<script>
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('hide'),2000))
+const hours={0:[null,null],1:[8,19],2:[8,19],3:[8,19],4:[8,19],5:[8,19],6:[8,15]}
+function checkStatus(){const now=new Date(),d=now.getDay(),h=now.getHours(),bar=document.getElementById('statusBar'),hr=hours[d];if(!hr||!hr[0]){bar.innerHTML='<span class="sdot"></span> Hoy cerramos — Abrimos el lunes';bar.className='status-bar closed'}else if(h>=hr[0]&&h<hr[1]){bar.innerHTML=`<span class="sdot"></span> Abierto ahora · Cerramos a las ${hr[1]}:00`;bar.className='status-bar open'}else{bar.innerHTML=`<span class="sdot"></span> Cerrado · Abrimos a las ${hr[0]}:00`;bar.className='status-bar closed'}}
+checkStatus()
+let selDiag=null
+function selectDiag(el){el.classList.toggle('sel');const sels=[...document.querySelectorAll('.diag-opt.sel')].map(e=>e.dataset.name);const btn=document.getElementById('diagBtn');const counter=document.getElementById('diagCounter');if(sels.length>0){counter.textContent=`✅ ${sels.length} falla${sels.length>1?'s':''} seleccionada${sels.length>1?'s':''}: ${sels.join(', ')}`;btn.style.pointerEvents='auto';btn.style.opacity='1';const lista=sels.map(s=>`• ${s}`).join('%0A');btn.href=`https://wa.me/5215530207385?text=Hola!%20Mi%20auto%20presenta%20las%20siguientes%20fallas:%0A${encodeURIComponent(sels.map(s=>`• ${s}`).join('\n'))}%0A%0A%C2%BFMe%20pueden%20dar%20una%20cotizaci%C3%B3n%3F`}else{counter.textContent='';btn.style.pointerEvents='none';btn.style.opacity='.4';btn.href='#'}}
+let tcCur=0,tcAuto
+const tcCards=document.querySelectorAll('.tc'),tcDots=document.querySelectorAll('.tcd')
+function tcGo(n){tcCards[tcCur].classList.remove('active');tcDots[tcCur].classList.remove('active');tcCur=n;tcCards[tcCur].classList.add('active');tcDots[tcCur].classList.add('active')}
+function tcChange(d){tcGo((tcCur+d+tcCards.length)%tcCards.length)}
+tcAuto=setInterval(()=>tcChange(1),5000)
+const rObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('on')})},{threshold:.1})
+document.querySelectorAll('.rev,.rev-l,.rev-r').forEach(el=>rObs.observe(el))
+const cObs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){const el=en.target,t=+el.dataset.t,dur=2000,s=performance.now();(function step(n){const p=Math.min((n-s)/dur,1);el.textContent=Math.floor(p*t);if(p<1)requestAnimationFrame(step)})(s);cObs.unobserve(el)}})},{threshold:.5})
+document.querySelectorAll('[data-t]').forEach(el=>cObs.observe(el))
+</script>
+</body>
+</html>
