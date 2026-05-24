@@ -3,207 +3,861 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MecánicaPRO — Taller Automotriz Monterrey</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<title>MecánicaPRO — Taller Mecánico Naucalpan</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{
-  --bg:#0A0A0A;--bg2:#111111;--dark:#0A0A0A;--card:#1A1A1A;
-  --p:#FFD700;--p2:#FFC200;
-  --g:#CCFF00;
-  --txt:#F5F5F5;--mu:#999;--bord:rgba(255,215,0,.15);
-  --w:#fff;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'IBM Plex Sans',sans-serif;background:var(--bg);color:var(--txt);overflow-x:hidden}
-
-/* SCROLL PROGRESS */
-#spb{position:fixed;top:0;left:0;width:0%;height:3px;background:linear-gradient(90deg,#FFD700,#FFC200,#CCFF00,#000 120%);z-index:9999;transition:width .1s linear;pointer-events:none}
-
-/* NAV */
-nav{position:fixed;top:4px;width:100%;z-index:100;background:#000;border-bottom:2px solid var(--p);height:60px;display:flex;justify-content:space-between;align-items:center;padding:0 60px}
-.nav-logo{display:flex;align-items:center;gap:6px;text-decoration:none;user-select:none}
-.nav-logo .wrench{font-size:22px;line-height:1}
-.nav-logo .brand{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--p);letter-spacing:1px;line-height:1}
-.nav-logo .pro{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--g);letter-spacing:1px;line-height:1}
-.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
-.nav-links a{color:rgba(245,245,245,.55);text-decoration:none;font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;transition:color .2s;font-family:'IBM Plex Sans',sans-serif}
-.nav-links a:hover{color:var(--p)}
-.nav-cta{padding:10px 24px;background:var(--p);color:#000;text-decoration:none;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-family:'IBM Plex Sans',sans-serif;transition:all .2s;border:2px solid var(--p)}
-.nav-cta:hover{background:transparent;color:var(--p);box-shadow:0 0 24px rgba(255,215,0,.4)}
-
-/* HERO */
-#hero{min-height:100vh;background:var(--dark);display:flex;flex-direction:column;justify-content:center;align-items:center;padding-top:64px;position:relative;overflow:hidden;text-align:center}
-.hero-stripes{position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(255,215,0,.04) 0px,rgba(255,215,0,.04) 2px,transparent 2px,transparent 60px);pointer-events:none;z-index:0}
-.hero-inner{position:relative;z-index:1;padding:60px 40px 40px}
-.hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,12vw,10rem);color:var(--p);line-height:.9;letter-spacing:2px;overflow:hidden}
-.hero-h1 .h-line{display:block;overflow:hidden}
-.hero-h1 .h-word{display:block;transform:translateY(-120%);opacity:0}
-.hero-divider{width:120px;height:6px;background:var(--p);margin:28px auto}
-.hero-sub{font-family:'IBM Plex Sans',sans-serif;font-size:clamp(14px,2vw,18px);color:var(--mu);letter-spacing:.5px;max-width:520px;margin:0 auto 40px;line-height:1.6}
-.hero-sub strong{color:var(--txt)}
-.hero-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-bottom:60px}
-.btn-primary{display:inline-flex;align-items:center;gap:10px;padding:18px 40px;background:var(--p);color:#000;text-decoration:none;font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-family:'IBM Plex Sans',sans-serif;transition:all .25s;border:2px solid var(--p)}
-.btn-primary:hover{background:transparent;color:var(--p);box-shadow:0 0 24px rgba(255,215,0,.4);transform:translateY(-2px)}
-.btn-outline{display:inline-flex;align-items:center;gap:10px;padding:18px 40px;background:transparent;color:var(--w);text-decoration:none;font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-family:'IBM Plex Sans',sans-serif;border:2px solid rgba(255,255,255,.35);transition:all .25s}
-.btn-outline:hover{border-color:var(--w);background:rgba(255,255,255,.06);transform:translateY(-2px)}
-.btn-green{display:inline-flex;align-items:center;gap:10px;padding:18px 40px;background:transparent;color:var(--g);text-decoration:none;font-size:14px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;font-family:'IBM Plex Sans',sans-serif;border:2px solid var(--g);transition:all .25s}
-.btn-green:hover{background:var(--g);color:#000;box-shadow:0 0 24px rgba(204,255,0,.35);transform:translateY(-2px)}
-.hero-stats{display:flex;gap:0;justify-content:center;border-top:1px solid var(--bord);width:100%;max-width:720px;margin:0 auto}
-.h-stat{flex:1;padding:32px 20px;text-align:center;border-right:1px solid var(--bord);position:relative}
-.h-stat:last-child{border-right:none}
-.h-stat-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,5vw,3.5rem);color:var(--p);line-height:1;display:block}
-.h-stat-lbl{font-family:'IBM Plex Sans',sans-serif;font-size:11px;font-weight:700;color:var(--mu);letter-spacing:2px;text-transform:uppercase;display:block;margin-top:4px}
-
-/* TICKER */
-.ticker{background:var(--p);overflow:hidden;padding:12px 0;border-top:2px solid var(--p2);border-bottom:2px solid var(--p2)}
-.ticker-inner{display:flex;gap:64px;animation:tickerMove 22s linear infinite;white-space:nowrap}
-.ticker-inner span{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#000;letter-spacing:2px;flex-shrink:0;display:flex;align-items:center;gap:12px}
-.ticker-inner span::before{content:'◆';font-size:10px;color:rgba(0,0,0,.4)}
-@keyframes tickerMove{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* SERVICIOS */
-#servicios{background:var(--bg2);padding:100px 60px}
-.section-label{font-family:'Bebas Neue',sans-serif;font-size:clamp(3rem,7vw,5rem);color:var(--p);margin-bottom:12px;line-height:1;letter-spacing:2px;display:block}
-.section-sub-label{font-family:'IBM Plex Sans',sans-serif;font-size:12px;font-weight:700;color:var(--mu);letter-spacing:3px;text-transform:uppercase;margin-bottom:56px;display:block}
-.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-.svc-card{background:var(--card);border-top:4px solid var(--p);padding:40px 32px;position:relative;overflow:hidden;cursor:default;transition:all .3s;border-left:4px solid transparent}
-.svc-card:hover{border-left-color:var(--p);transform:translateX(6px);box-shadow:-4px 0 0 var(--p)}
-.svc-num{font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--p);line-height:1;display:block;margin-bottom:12px}
-.svc-name{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--w);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:4px}
-.svc-price{font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:700;color:var(--p);letter-spacing:.5px;margin-bottom:14px;display:block}
-.svc-desc{font-family:'IBM Plex Sans',sans-serif;font-size:13px;color:var(--mu);line-height:1.7}
-.svc-card::after{content:'';position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 40px 40px 0;border-color:transparent var(--bg2) transparent transparent;transition:border-color .3s}
-.svc-card:hover::after{border-color:transparent var(--bg) transparent transparent}
-
-/* POR QUÉ — YELLOW SECTION */
-#porque{background:var(--p);padding:100px 60px}
-.pq-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,9vw,8rem);color:#000;line-height:.9;letter-spacing:2px;margin-bottom:60px}
-.pq-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px}
-.pq-card{background:#000;padding:56px 48px;transition:background .2s}
-.pq-card:hover{background:#111}
-.pq-big-num{font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--p);line-height:1;display:block;margin-bottom:8px}
-.pq-name{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--w);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:10px}
-.pq-desc{font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:var(--mu);line-height:1.7}
-
-/* PROCESO */
-#proceso{background:var(--dark);padding:100px 60px}
-.proceso-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:60px;position:relative}
-.proceso-steps::before{content:'';position:absolute;top:36px;left:calc(16.666% + 28px);right:calc(16.666% + 28px);height:2px;background:var(--p);z-index:0}
-.proceso-step{text-align:center;padding:0 32px;position:relative;z-index:1}
-.step-circle{width:72px;height:72px;background:var(--dark);border:3px solid var(--p);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--p);transition:all .3s}
-.proceso-step:hover .step-circle{background:var(--p);color:#000;box-shadow:0 0 28px rgba(255,215,0,.4)}
-.step-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--w);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:12px}
-.step-desc{font-family:'IBM Plex Sans',sans-serif;font-size:13px;color:var(--mu);line-height:1.7}
-
-/* TESTIMONIOS */
-#testimonios{background:var(--bg2);padding:100px 60px}
-.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:60px}
-.test-card{background:var(--card);padding:40px 36px;position:relative}
-.test-quote{font-family:'Bebas Neue',sans-serif;font-size:80px;color:var(--p);line-height:.7;display:block;margin-bottom:16px;opacity:.9}
-.test-text{font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:rgba(245,245,245,.75);line-height:1.8;margin-bottom:24px;font-style:italic}
-.test-stars{color:var(--p);font-size:16px;letter-spacing:2px;display:block;margin-bottom:16px}
-.test-author{font-family:'IBM Plex Sans',sans-serif;font-size:13px;font-weight:700;color:var(--w);display:block}
-.test-car{font-family:'IBM Plex Sans',sans-serif;font-size:11px;color:var(--mu);letter-spacing:1px;text-transform:uppercase;display:block;margin-top:3px}
-.test-card::before{content:'';position:absolute;top:0;left:0;width:40px;height:4px;background:var(--p)}
-
-/* CTA SECTION */
-#cta-section{background:var(--p);padding:100px 60px;text-align:center}
-.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,10vw,9rem);color:#000;line-height:.9;letter-spacing:2px;margin-bottom:40px}
-.cta-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-bottom:40px}
-.cta-btn-dark{display:inline-flex;align-items:center;gap:10px;padding:20px 52px;background:#000;color:var(--p);text-decoration:none;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-family:'IBM Plex Sans',sans-serif;border:2px solid #000;transition:all .25s}
-.cta-btn-dark:hover{background:transparent;color:#000;box-shadow:0 0 24px rgba(0,0,0,.3);transform:translateY(-2px)}
-.cta-btn-wa{display:inline-flex;align-items:center;gap:10px;padding:20px 52px;background:transparent;color:#000;text-decoration:none;font-size:16px;font-weight:700;letter-spacing:2px;text-transform:uppercase;font-family:'IBM Plex Sans',sans-serif;border:2px solid #000;transition:all .25s}
-.cta-btn-wa:hover{background:#000;color:var(--p);transform:translateY(-2px)}
-.cta-phone{font-family:'Bebas Neue',sans-serif;font-size:32px;color:#000;letter-spacing:3px;display:block;margin-bottom:8px}
-.cta-addr{font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:rgba(0,0,0,.65);letter-spacing:.5px}
-
-/* FOOTER */
-footer{background:#000;border-top:2px solid var(--bord);padding:60px}
-.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:60px}
-.footer-brand .brand-mark{display:flex;align-items:center;gap:6px;margin-bottom:20px}
-.footer-brand .brand-mark .wrench{font-size:20px}
-.footer-brand .brand-mark .brand{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--p);letter-spacing:1px}
-.footer-brand .brand-mark .pro{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--g);letter-spacing:1px}
-.footer-brand p{font-family:'IBM Plex Sans',sans-serif;font-size:13px;color:var(--mu);line-height:1.7;max-width:260px}
-.footer-col h4{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--p);letter-spacing:1.5px;margin-bottom:20px;display:block}
-.footer-col ul{list-style:none}
-.footer-col ul li{margin-bottom:10px}
-.footer-col ul li a{font-family:'IBM Plex Sans',sans-serif;font-size:13px;color:var(--mu);text-decoration:none;transition:color .2s;letter-spacing:.3px}
-.footer-col ul li a:hover{color:var(--p)}
-.footer-col .contact-line{font-family:'IBM Plex Sans',sans-serif;font-size:13px;color:var(--mu);margin-bottom:10px;line-height:1.6}
-.footer-col .contact-line strong{color:var(--txt);font-weight:500}
-.footer-bottom{border-top:1px solid var(--bord);margin-top:48px;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.footer-bottom p{font-family:'IBM Plex Sans',sans-serif;font-size:12px;color:rgba(245,245,245,.25)}
-
-/* FLOATING WHATSAPP */
-.wa-float{position:fixed;bottom:32px;right:32px;z-index:999}
-.wa-btn{width:60px;height:60px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:28px;box-shadow:0 4px 20px rgba(37,211,102,.5);transition:transform .25s;border:3px solid rgba(255,255,255,.2);position:relative}
-.wa-btn:hover{transform:scale(1.1)}
-.wa-ring{position:absolute;inset:0;border-radius:50%;background:#25D366;animation:waRing 2.2s ease-out infinite;z-index:-1}
-@keyframes waRing{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.9);opacity:0}}
-
-/* REVEAL CLASSES */
-.reveal{opacity:0;transform:translateY(32px);transition:opacity .7s,transform .7s}
-.reveal.on{opacity:1;transform:translateY(0)}
-.reveal-l{opacity:0;transform:translateX(-30px);transition:opacity .7s ease,transform .7s ease}
-.reveal-l.on{opacity:1;transform:translateX(0)}
-
-/* REV — new scroll-reveal variants */
-.rev{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
-.rev.on{opacity:1;transform:translateY(0)}
-.rev-l{opacity:0;transform:translateX(-50px);transition:opacity .7s ease,transform .7s ease}
-.rev-l.on{opacity:1;transform:translateX(0)}
-.rev-r{opacity:0;transform:translateX(50px);transition:opacity .7s ease,transform .7s ease}
-.rev-r.on{opacity:1;transform:translateX(0)}
-
-/* SHAKE on CTA hover */
-@keyframes shake{
-  0%,100%{transform:translateX(0) translateY(-2px)}
-  20%{transform:translateX(-3px) translateY(-2px)}
-  40%{transform:translateX(3px) translateY(-2px)}
-  60%{transform:translateX(-3px) translateY(-2px)}
-  80%{transform:translateX(3px) translateY(-2px)}
-}
-.btn-primary:hover,.btn-green:hover,.cta-btn-dark:hover,.cta-btn-wa:hover{
-  animation:shake .45s ease-in-out;
+/* ─── DESIGN TOKENS ─────────────────────────────────────── */
+:root {
+  --bg:   #F5F5F0;   /* light concrete paper */
+  --bg2:  #FFFFFF;
+  --or:   #E84000;   /* deep orange-red */
+  --dk:   #1A1A1A;   /* near-black */
+  --gr:   #666666;
+  --lgr:  #AAAAAA;
+  --bord: #E0E0D8;
+  --w:    #FFFFFF;
+  --stripe: repeating-linear-gradient(
+    45deg,
+    #1A1A1A 0px, #1A1A1A 8px,
+    transparent 8px, transparent 20px
+  );
 }
 
-/* TYPEWRITER cursor */
-.tw-cursor{display:inline-block;width:2px;height:1em;background:var(--p);margin-left:2px;vertical-align:middle;animation:twBlink .75s step-end infinite}
-@keyframes twBlink{0%,100%{opacity:1}50%{opacity:0}}
-
-/* 3D TILT on service cards */
-.svc-card{transform-style:preserve-3d;will-change:transform}
-
-/* NAV active link */
-.nav-links a.active{color:var(--p)}
-
-/* RESPONSIVE */
-@media(max-width:1024px){
-  .svc-grid{grid-template-columns:repeat(2,1fr)}
-  .pq-grid{grid-template-columns:1fr}
-  .test-grid{grid-template-columns:1fr}
-  .footer-grid{grid-template-columns:1fr 1fr}
+/* ─── RESET ──────────────────────────────────────────────── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--bg);
+  color: var(--dk);
+  overflow-x: hidden;
 }
-@media(max-width:768px){
-  nav{padding:0 20px}
-  .nav-links,.nav-cta{display:none}
-  #servicios,#porque,#proceso,#testimonios,#cta-section,footer{padding:70px 24px}
-  .svc-grid{grid-template-columns:1fr}
-  .proceso-steps{grid-template-columns:1fr;gap:48px}
-  .proceso-steps::before{display:none}
-  .hero-stats{flex-direction:column}
-  .h-stat{border-right:none;border-bottom:1px solid var(--bord)}
-  .footer-grid{grid-template-columns:1fr}
-  .footer-bottom{flex-direction:column;text-align:center}
-  .hero-btns{flex-direction:column;align-items:center}
-  .cta-btns{flex-direction:column;align-items:center}
+
+/* ─── SCROLL PROGRESS ────────────────────────────────────── */
+#spb {
+  position: fixed; top: 0; left: 0;
+  width: 0%; height: 3px;
+  background: var(--or);
+  z-index: 9999;
+  transition: width .1s linear;
+  pointer-events: none;
 }
-@media(max-width:480px){
-  .hero-h1{font-size:4rem}
-  .pq-title{font-size:3.5rem}
-  .cta-title{font-size:3.5rem}
+
+/* ─── NAV ────────────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  background: var(--w);
+  border-bottom: 2px solid var(--bord);
+  height: 64px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 60px;
+  transition: transform .35s;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 4px;
+  text-decoration: none; user-select: none;
+}
+.nav-logo .brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px; font-weight: 900;
+  color: var(--dk); letter-spacing: 1px; line-height: 1;
+  text-transform: uppercase;
+}
+.nav-logo .pro {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px; font-weight: 900;
+  color: var(--or); letter-spacing: 1px; line-height: 1;
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--gr); text-decoration: none;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  font-family: 'Barlow', sans-serif;
+  transition: color .2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--or); }
+.nav-cta {
+  padding: 10px 24px;
+  background: var(--or); color: var(--w);
+  text-decoration: none;
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  font-family: 'Barlow', sans-serif;
+  transition: background .2s;
+  border: 2px solid var(--or);
+  position: relative; overflow: hidden;
+}
+.nav-cta:hover { background: var(--dk); border-color: var(--dk); }
+
+/* ─── HERO ───────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  background: var(--bg);
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  align-items: stretch;
+  padding-top: 64px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-left {
+  padding: 80px 60px 60px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; z-index: 1;
+}
+.hero-eyebrow {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--or); margin-bottom: 24px;
+  display: flex; align-items: center; gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block; width: 32px; height: 2px;
+  background: var(--or);
+}
+.hero-h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 900;
+  color: var(--dk);
+  line-height: .92;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.hero-h1 .line-or { color: var(--or); }
+.hero-h1 .line-loc {
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 700;
+  color: var(--gr);
+  letter-spacing: 2px;
+}
+.hero-divider {
+  width: 60px; height: 4px;
+  background: var(--or);
+  margin: 28px 0;
+}
+.hero-sub {
+  font-family: 'Barlow', sans-serif;
+  font-size: clamp(15px, 1.6vw, 17px);
+  color: var(--gr);
+  max-width: 440px;
+  line-height: 1.65;
+  margin-bottom: 40px;
+}
+.hero-sub strong { color: var(--dk); font-weight: 600; }
+.hero-btns {
+  display: flex; gap: 14px; flex-wrap: wrap;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px;
+  background: var(--or); color: var(--w);
+  text-decoration: none;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  font-family: 'Barlow', sans-serif;
+  transition: background .2s, transform .2s;
+  border: 2px solid var(--or);
+  position: relative; overflow: hidden;
+}
+.btn-primary:hover { background: var(--dk); border-color: var(--dk); transform: translateY(-2px); }
+.btn-outline {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px;
+  background: transparent; color: var(--dk);
+  text-decoration: none;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  font-family: 'Barlow', sans-serif;
+  border: 2px solid var(--dk);
+  transition: background .2s, color .2s, transform .2s;
+  position: relative; overflow: hidden;
+}
+.btn-outline:hover { background: var(--dk); color: var(--w); transform: translateY(-2px); }
+.btn-wa {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 36px;
+  background: transparent; color: #25D366;
+  text-decoration: none;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  font-family: 'Barlow', sans-serif;
+  border: 2px solid #25D366;
+  transition: background .2s, color .2s, transform .2s;
+  position: relative; overflow: hidden;
+}
+.btn-wa:hover { background: #25D366; color: var(--w); transform: translateY(-2px); }
+
+.hero-stats {
+  display: flex; gap: 0;
+  margin-top: 60px;
+  border-top: 2px solid var(--bord);
+}
+.h-stat {
+  flex: 1; padding: 24px 20px;
+  border-right: 2px solid var(--bord);
+}
+.h-stat:last-child { border-right: none; }
+.h-stat-num {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  color: var(--or);
+  line-height: 1;
+}
+.h-stat-lbl {
+  display: block;
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px; font-weight: 700;
+  color: var(--gr); letter-spacing: 2px;
+  text-transform: uppercase; margin-top: 4px;
+}
+
+/* Hero right — diagonal stripe decoration */
+.hero-right {
+  position: relative;
+  overflow: hidden;
+  background: var(--dk);
+}
+.hero-right-inner {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  gap: 0;
+}
+.stripe-band {
+  width: 100%;
+  height: 80px;
+  background: var(--stripe);
+  opacity: .12;
+}
+.stripe-band.orange {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--or) 0px, var(--or) 8px,
+    transparent 8px, transparent 20px
+  );
+  opacity: .35;
+  height: 100px;
+}
+.hero-right-badge {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 2;
+}
+.hero-badge-year {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(4rem, 8vw, 7rem);
+  font-weight: 900;
+  color: var(--or);
+  line-height: 1;
+  display: block;
+}
+.hero-badge-txt {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  display: block;
+  margin-top: 8px;
+}
+.hero-badge-line {
+  width: 40px; height: 2px; background: var(--or);
+  margin: 12px auto;
+}
+.hero-badge-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.4rem; font-weight: 700;
+  color: var(--w);
+  letter-spacing: 2px; text-transform: uppercase;
+  display: block;
+}
+
+/* ─── TICKER ─────────────────────────────────────────────── */
+.ticker {
+  background: var(--or);
+  overflow: hidden; padding: 11px 0;
+}
+.ticker-inner {
+  display: flex; gap: 60px;
+  animation: tickerMove 24s linear infinite;
+  white-space: nowrap;
+}
+.ticker-inner span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 700;
+  color: var(--w); letter-spacing: 2px;
+  flex-shrink: 0;
+  display: flex; align-items: center; gap: 12px;
+  text-transform: uppercase;
+}
+.ticker-inner span::before {
+  content: '▶';
+  font-size: 8px; opacity: .6;
+}
+@keyframes tickerMove { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* ─── SECTION COMMONS ────────────────────────────────────── */
+.section-wrap { padding: 100px 60px; }
+.section-wrap.light { background: var(--bg); }
+.section-wrap.white { background: var(--w); }
+.section-header { margin-bottom: 56px; }
+.section-eyebrow {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--or); display: flex; align-items: center; gap: 10px;
+  margin-bottom: 12px;
+}
+.section-eyebrow::before {
+  content: '';
+  display: inline-block; width: 24px; height: 2px;
+  background: var(--or);
+}
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  font-weight: 900;
+  color: var(--dk);
+  line-height: .92;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  display: block;
+}
+.section-title-or { color: var(--or); }
+
+/* ─── DIAGONAL ACCENT STRIP ─────────────────────────────── */
+.accent-strip {
+  height: 10px;
+  background: var(--stripe);
+  background-size: 28px 28px;
+}
+.accent-strip.or {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--or) 0px, var(--or) 8px,
+    transparent 8px, transparent 20px
+  );
+  height: 6px;
+}
+
+/* ─── SERVICES ───────────────────────────────────────────── */
+#servicios { background: var(--bg); padding: 100px 60px; }
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--bord);
+}
+.svc-card {
+  background: var(--w);
+  border-top: 4px solid var(--bord);
+  padding: 40px 32px;
+  position: relative; overflow: hidden;
+  cursor: default;
+  transition: border-color .25s, box-shadow .25s;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.svc-card:hover {
+  border-top-color: var(--or);
+  box-shadow: 4px 4px 0 var(--or);
+  z-index: 2;
+}
+.svc-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 52px; font-weight: 900;
+  color: var(--or);
+  line-height: 1; display: block; margin-bottom: 12px;
+  opacity: .25;
+  transition: opacity .25s;
+}
+.svc-card:hover .svc-num { opacity: 1; }
+.svc-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 800;
+  color: var(--dk);
+  letter-spacing: .5px; text-transform: uppercase;
+  display: block; margin-bottom: 12px;
+}
+.svc-tag {
+  display: inline-block;
+  background: var(--bg);
+  border: 1px solid var(--bord);
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px; font-weight: 700;
+  color: var(--gr); letter-spacing: 1px; text-transform: uppercase;
+  padding: 4px 10px; margin-bottom: 14px;
+}
+.svc-desc {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; color: var(--gr); line-height: 1.7;
+}
+/* inline stripe accent at card bottom */
+.svc-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--stripe);
+  background-size: 20px 20px;
+  opacity: 0;
+  transition: opacity .25s;
+}
+.svc-card:hover::after { opacity: 1; }
+
+/* ─── STATS BAR ──────────────────────────────────────────── */
+#stats-bar {
+  background: var(--or);
+  padding: 60px;
+}
+.stats-inner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: rgba(0,0,0,.12);
+  max-width: 900px; margin: 0 auto;
+}
+.stat-block {
+  background: var(--or);
+  padding: 48px 40px;
+  text-align: center;
+}
+.stat-big {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-weight: 900;
+  color: var(--w);
+  line-height: 1;
+  display: block;
+}
+.stat-lbl {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: rgba(255,255,255,.65);
+  display: block; margin-top: 8px;
+}
+
+/* ─── PROCESO ─────────────────────────────────────────────── */
+#proceso { background: var(--w); padding: 100px 60px; }
+.proceso-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--bord);
+  margin-top: 56px;
+}
+.proceso-step {
+  background: var(--bg);
+  padding: 48px 40px;
+  position: relative;
+  transition: background .25s;
+}
+.proceso-step:hover { background: var(--w); }
+.step-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 80px; font-weight: 900;
+  color: var(--or);
+  line-height: 1;
+  display: block;
+  opacity: .15;
+  transition: opacity .25s;
+  margin-bottom: -16px;
+}
+.proceso-step:hover .step-num { opacity: .3; }
+.step-icon {
+  width: 52px; height: 52px;
+  background: var(--or);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  margin-bottom: 20px;
+  position: relative; z-index: 1;
+}
+.step-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px; font-weight: 800;
+  color: var(--dk);
+  letter-spacing: .5px; text-transform: uppercase;
+  display: block; margin-bottom: 12px;
+}
+.step-desc {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; color: var(--gr); line-height: 1.7;
+}
+/* connector line */
+.proceso-steps::before {
+  display: none;
+}
+.step-connector {
+  position: absolute; top: 96px; right: -1px;
+  width: 2px; height: 28px;
+  background: var(--or);
+  z-index: 3;
+}
+.proceso-step:last-child .step-connector { display: none; }
+
+/* ─── DIAGNOSTIC TOOL ────────────────────────────────────── */
+#diagnostico { background: var(--bg); padding: 100px 60px; }
+.diag-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--bord);
+  margin-top: 56px;
+}
+.diag-left {
+  background: var(--dk);
+  padding: 56px 48px;
+}
+.diag-left-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  color: var(--w);
+  text-transform: uppercase;
+  line-height: .92;
+  margin-bottom: 20px;
+}
+.diag-left-title span { color: var(--or); }
+.diag-left-desc {
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px; color: rgba(255,255,255,.55);
+  line-height: 1.7; margin-bottom: 32px;
+}
+.diag-checklist { list-style: none; }
+.diag-checklist li {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; color: rgba(255,255,255,.7);
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.08);
+  display: flex; align-items: center; gap: 12px;
+}
+.diag-checklist li::before {
+  content: '▶';
+  color: var(--or); font-size: 9px;
+}
+.diag-right {
+  background: var(--w);
+  padding: 56px 48px;
+}
+.diag-form-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.8rem; font-weight: 800;
+  color: var(--dk);
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  letter-spacing: .5px;
+}
+.diag-field {
+  margin-bottom: 16px;
+}
+.diag-field label {
+  display: block;
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gr); margin-bottom: 8px;
+}
+.diag-field input,
+.diag-field select,
+.diag-field textarea {
+  width: 100%; padding: 14px 16px;
+  background: var(--bg);
+  border: 2px solid var(--bord);
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px; color: var(--dk);
+  outline: none;
+  transition: border-color .2s;
+  appearance: none;
+}
+.diag-field input:focus,
+.diag-field select:focus,
+.diag-field textarea:focus {
+  border-color: var(--or);
+}
+.diag-field textarea { resize: vertical; min-height: 90px; }
+.diag-submit {
+  width: 100%; padding: 16px;
+  background: var(--or); color: var(--w);
+  border: 2px solid var(--or);
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  cursor: pointer;
+  transition: background .2s;
+  position: relative; overflow: hidden;
+}
+.diag-submit:hover { background: var(--dk); border-color: var(--dk); }
+#diag-result {
+  display: none;
+  margin-top: 16px; padding: 16px;
+  background: var(--bg);
+  border-left: 4px solid var(--or);
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; color: var(--dk); line-height: 1.6;
+}
+
+/* ─── CONTACT ────────────────────────────────────────────── */
+#contacto { background: var(--w); padding: 100px 60px; }
+.contact-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  background: var(--bord);
+  margin-top: 56px;
+}
+.contact-info {
+  background: var(--dk); padding: 56px 48px;
+}
+.contact-info-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 900; color: var(--w);
+  text-transform: uppercase; line-height: .92;
+  margin-bottom: 36px;
+}
+.contact-info-title span { color: var(--or); }
+.c-info-block { margin-bottom: 28px; }
+.c-info-label {
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--or); display: block; margin-bottom: 6px;
+}
+.c-info-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.25rem; font-weight: 700;
+  color: var(--w); display: block; letter-spacing: .5px;
+}
+.c-info-sub {
+  font-family: 'Barlow', sans-serif;
+  font-size: 12px; color: rgba(255,255,255,.45);
+  display: block; margin-top: 2px;
+}
+.wa-cta-big {
+  display: flex; align-items: center; gap: 12px;
+  padding: 18px 28px;
+  background: #25D366; color: var(--w);
+  text-decoration: none;
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  margin-top: 36px;
+  transition: background .2s;
+}
+.wa-cta-big:hover { background: #1ead55; }
+
+.contact-form-side { background: var(--bg); padding: 56px 48px; }
+.contact-form-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 1.8rem; font-weight: 800; color: var(--dk);
+  text-transform: uppercase; margin-bottom: 28px; letter-spacing: .5px;
+}
+.c-field { margin-bottom: 16px; }
+.c-field label {
+  display: block;
+  font-family: 'Barlow', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--gr); margin-bottom: 8px;
+}
+.c-field input,
+.c-field select,
+.c-field textarea {
+  width: 100%; padding: 14px 16px;
+  background: var(--w); border: 2px solid var(--bord);
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px; color: var(--dk); outline: none;
+  transition: border-color .2s; appearance: none;
+}
+.c-field input:focus,
+.c-field select:focus,
+.c-field textarea:focus { border-color: var(--or); }
+.c-field textarea { resize: vertical; min-height: 100px; }
+.c-submit {
+  width: 100%; padding: 16px;
+  background: var(--or); color: var(--w);
+  border: 2px solid var(--or);
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  cursor: pointer; transition: background .2s;
+  position: relative; overflow: hidden;
+}
+.c-submit:hover { background: var(--dk); border-color: var(--dk); }
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+footer {
+  background: var(--dk);
+  padding: 72px 60px 0;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.footer-brand .brand-mark {
+  display: flex; align-items: center; gap: 4px;
+  margin-bottom: 20px;
+}
+.footer-brand .brand-mark .brand {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px; font-weight: 900;
+  color: var(--w); letter-spacing: 1px;
+}
+.footer-brand .brand-mark .pro {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px; font-weight: 900;
+  color: var(--or); letter-spacing: 1px;
+}
+.footer-brand p {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; color: rgba(255,255,255,.4);
+  line-height: 1.7; max-width: 260px;
+}
+.footer-stripe {
+  width: 40px; height: 4px;
+  background: var(--or); margin-bottom: 20px;
+}
+.footer-col h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 800;
+  color: var(--or);
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li a {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; color: rgba(255,255,255,.4);
+  text-decoration: none; transition: color .2s;
+}
+.footer-col ul li a:hover { color: var(--or); }
+.footer-col .contact-line {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; color: rgba(255,255,255,.4);
+  margin-bottom: 12px; line-height: 1.6;
+}
+.footer-col .contact-line strong {
+  color: rgba(255,255,255,.75); font-weight: 600;
+}
+.footer-bottom {
+  padding: 24px 0;
+  display: flex; justify-content: space-between;
+  align-items: center; flex-wrap: wrap; gap: 12px;
+}
+.footer-bottom p {
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px; color: rgba(255,255,255,.2);
+  letter-spacing: .5px;
+}
+
+/* ─── FLOATING WHATSAPP ──────────────────────────────────── */
+.wa-float { position: fixed; bottom: 32px; right: 32px; z-index: 999; }
+.wa-btn {
+  width: 60px; height: 60px;
+  background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; font-size: 26px;
+  box-shadow: 0 4px 20px rgba(37,211,102,.45);
+  transition: transform .25s;
+  position: relative;
+}
+.wa-btn:hover { transform: scale(1.1); }
+.wa-ring {
+  position: absolute; inset: 0;
+  background: #25D366;
+  animation: waRing 2.2s ease-out infinite; z-index: -1;
+}
+@keyframes waRing {
+  0% { transform: scale(1); opacity: .6; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
+/* ─── SCROLL REVEAL ──────────────────────────────────────── */
+.rev {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: .7s cubic-bezier(.16,1,.3,1);
+}
+.rev.on { opacity: 1; transform: translateY(0); }
+.rev-l {
+  opacity: 0; transform: translateX(-40px);
+  transition: .7s cubic-bezier(.16,1,.3,1);
+}
+.rev-l.on { opacity: 1; transform: translateX(0); }
+.rev-r {
+  opacity: 0; transform: translateX(40px);
+  transition: .7s cubic-bezier(.16,1,.3,1);
+}
+.rev-r.on { opacity: 1; transform: translateX(0); }
+
+/* ─── TYPEWRITER CURSOR ──────────────────────────────────── */
+.tw-cursor {
+  display: inline-block; width: 2px; height: .9em;
+  background: var(--or); margin-left: 2px;
+  vertical-align: middle;
+  animation: twBlink .75s step-end infinite;
+}
+@keyframes twBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ─── SHAKE on hover ─────────────────────────────────────── */
+@keyframes shake {
+  0%,100% { transform: translateX(0) translateY(-2px); }
+  20%      { transform: translateX(-3px) translateY(-2px); }
+  40%      { transform: translateX(3px) translateY(-2px); }
+  60%      { transform: translateX(-3px) translateY(-2px); }
+  80%      { transform: translateX(3px) translateY(-2px); }
+}
+.btn-primary:hover, .btn-outline:hover, .btn-wa:hover,
+.nav-cta:hover, .c-submit:hover, .diag-submit:hover {
+  animation: shake .45s ease-in-out;
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media(max-width:1024px) {
+  #hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .svc-grid { grid-template-columns: repeat(2,1fr); }
+  .stats-inner { grid-template-columns: repeat(3,1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .diag-wrap, .contact-wrap, .proceso-steps {
+    grid-template-columns: 1fr;
+  }
+}
+@media(max-width:768px) {
+  nav { padding: 0 20px; }
+  .nav-links, .nav-cta { display: none; }
+  .section-wrap, #servicios, #stats-bar, #proceso,
+  #diagnostico, #contacto, footer { padding: 70px 24px; }
+  .svc-grid { grid-template-columns: 1fr; }
+  .stats-inner { grid-template-columns: 1fr; }
+  .proceso-steps { grid-template-columns: 1fr; }
+  .hero-left { padding: 60px 24px 40px; }
+  .hero-stats { flex-direction: column; }
+  .h-stat { border-right: none; border-bottom: 2px solid var(--bord); }
+  .hero-btns { flex-direction: column; align-items: flex-start; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .diag-left, .diag-right, .contact-info, .contact-form-side {
+    padding: 40px 28px;
+  }
+}
+@media(max-width:480px) {
+  .hero-h1 { font-size: 3rem; }
 }
 </style>
 </head>
@@ -215,47 +869,68 @@ footer{background:#000;border-top:2px solid var(--bord);padding:60px}
 <!-- NAV -->
 <nav id="nav">
   <a href="#hero" class="nav-logo">
-    <span class="wrench">🔧</span>
-    <span class="brand">MECÁNICA</span>
-    <span class="pro">PRO</span>
+    <span class="brand">MECÁNICA</span><span class="pro">PRO</span>
   </a>
   <ul class="nav-links">
     <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#porque">Nosotros</a></li>
     <li><a href="#proceso">Proceso</a></li>
-    <li><a href="#testimonios">Clientes</a></li>
+    <li><a href="#diagnostico">Diagnóstico</a></li>
+    <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <a href="https://wa.me/528112345678?text=Hola!%20Necesito%20servicio%20para%20mi%20auto" class="nav-cta" target="_blank" rel="noopener noreferrer">COTIZAR</a>
+  <a href="https://wa.me/5255718310830?text=Hola!%20Necesito%20servicio%20para%20mi%20auto" class="nav-cta" target="_blank" rel="noopener noreferrer">COTIZAR AHORA</a>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-stripes"></div>
-  <div class="hero-inner">
+  <!-- LEFT -->
+  <div class="hero-left">
+    <p class="hero-eyebrow rev" style="transition-delay:.05s">Naucalpan · Estado de México</p>
     <h1 class="hero-h1">
-      <span class="h-line"><span class="h-word" id="hw1">ARREGLAMOS</span></span>
-      <span class="h-line"><span class="h-word" id="hw2">TU AUTO</span></span>
+      <span class="rev" style="transition-delay:.1s">TALLER DE</span>
+      <span class="rev line-or" style="transition-delay:.18s">CONFIANZA</span>
+      <br>
+      <span class="rev line-loc" style="transition-delay:.26s">NAUCALPAN</span>
     </h1>
-    <div class="hero-divider"></div>
-    <p class="hero-sub" id="hero-sub-tw" style="opacity:0"><strong>Diagnóstico preciso.</strong> Trabajo honesto. Precios justos.</p>
-    <div class="hero-btns">
-      <a href="https://wa.me/528112345678?text=Hola!%20Necesito%20servicio%20para%20mi%20auto" class="btn-primary" target="_blank" rel="noopener noreferrer">COTIZAR AHORA</a>
-      <a href="tel:+528112345678" class="btn-outline">📞 Llamar</a>
-      <a href="https://wa.me/528112345678?text=Hola!%20Necesito%20servicio%20para%20mi%20auto" class="btn-green" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+    <div class="hero-divider rev" style="transition-delay:.38s"></div>
+    <p class="hero-sub rev" id="hero-sub-tw" style="transition-delay:.44s; opacity:0">
+      <strong>Diagnóstico preciso.</strong> Trabajo honesto. Precios justos en Naucalpan y toda el área metropolitana.
+    </p>
+    <div class="hero-btns rev" style="transition-delay:.5s">
+      <a href="https://wa.me/5255718310830?text=Hola!%20Necesito%20servicio%20para%20mi%20auto" class="btn-primary" target="_blank" rel="noopener noreferrer">COTIZAR AHORA</a>
+      <a href="tel:+5255718310830" class="btn-outline">📞 Llamar</a>
+      <a href="https://wa.me/5255718310830?text=Hola!%20Necesito%20servicio%20para%20mi%20auto" class="btn-wa" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+    </div>
+    <div class="hero-stats rev" style="transition-delay:.62s">
+      <div class="h-stat">
+        <span class="h-stat-num" data-count="15" data-suffix="">15</span>
+        <span class="h-stat-lbl">Años de exp.</span>
+      </div>
+      <div class="h-stat">
+        <span class="h-stat-num" data-count="8000" data-suffix="+">8,000+</span>
+        <span class="h-stat-lbl">Clientes</span>
+      </div>
+      <div class="h-stat">
+        <span class="h-stat-num" data-count="24" data-suffix="h">24h</span>
+        <span class="h-stat-lbl">Diagnóstico</span>
+      </div>
     </div>
   </div>
-  <div class="hero-stats">
-    <div class="h-stat">
-      <span class="h-stat-num" data-count="15" data-suffix="">15</span>
-      <span class="h-stat-lbl">AÑ. EXP.</span>
+  <!-- RIGHT — decorative panel -->
+  <div class="hero-right">
+    <div class="hero-right-inner">
+      <div class="stripe-band"></div>
+      <div class="stripe-band orange"></div>
+      <div class="stripe-band"></div>
+      <div class="stripe-band orange"></div>
+      <div class="stripe-band"></div>
+      <div class="stripe-band orange"></div>
+      <div class="stripe-band"></div>
     </div>
-    <div class="h-stat">
-      <span class="h-stat-num" data-count="8000" data-suffix="+">8,000+</span>
-      <span class="h-stat-lbl">AUTOS</span>
-    </div>
-    <div class="h-stat">
-      <span class="h-stat-num" data-count="24" data-suffix="h">24h</span>
-      <span class="h-stat-lbl">RESPUESTA</span>
+    <div class="hero-right-badge">
+      <span class="hero-badge-year">15</span>
+      <div class="hero-badge-line"></div>
+      <span class="hero-badge-txt">Años de Experiencia</span>
+      <span class="hero-badge-sub" style="margin-top:16px">MecánicaPRO</span>
     </div>
   </div>
 </section>
@@ -266,162 +941,243 @@ footer{background:#000;border-top:2px solid var(--bord);padding:60px}
     <span>DIAGNÓSTICO COMPUTARIZADO</span>
     <span>CAMBIO DE ACEITE</span>
     <span>FRENOS &amp; SUSPENSIÓN</span>
-    <span>MOTOR &amp; TRANSMISIÓN</span>
     <span>SISTEMA ELÉCTRICO</span>
-    <span>AIRE ACONDICIONADO</span>
-    <span>MONTERREY NL</span>
+    <span>AFINACIÓN</span>
+    <span>NAUCALPAN</span>
+    <span>15 AÑOS DE EXPERIENCIA</span>
     <span>DIAGNÓSTICO COMPUTARIZADO</span>
     <span>CAMBIO DE ACEITE</span>
     <span>FRENOS &amp; SUSPENSIÓN</span>
-    <span>MOTOR &amp; TRANSMISIÓN</span>
     <span>SISTEMA ELÉCTRICO</span>
-    <span>AIRE ACONDICIONADO</span>
-    <span>MONTERREY NL</span>
+    <span>AFINACIÓN</span>
+    <span>NAUCALPAN</span>
+    <span>15 AÑOS DE EXPERIENCIA</span>
   </div>
 </div>
 
+<!-- ─ ACCENT STRIP ─ -->
+<div class="accent-strip"></div>
+
 <!-- SERVICIOS -->
 <section id="servicios">
-  <div class="reveal">
-    <span class="section-label">SERVICIOS</span>
-    <span class="section-sub-label">Lo que hacemos mejor</span>
+  <div class="section-header rev">
+    <p class="section-eyebrow">Lo que hacemos mejor</p>
+    <span class="section-title">NUESTROS <span class="section-title-or">SERVICIOS</span></span>
   </div>
   <div class="svc-grid">
-    <div class="svc-card reveal-l" style="transition-delay:.0s">
+    <div class="svc-card rev" style="transition-delay:.0s">
       <span class="svc-num">01</span>
-      <span class="svc-name">Diagnóstico Computarizado</span>
-      <span class="svc-price">desde $350</span>
-      <p class="svc-desc">Lectura completa de códigos de falla con equipo OBD2 de última generación. Identificamos el problema exacto.</p>
+      <span class="svc-name">Afinación</span>
+      <span class="svc-tag">desde $350</span>
+      <p class="svc-desc">Bujías, filtros, revisión de sistemas. Tu motor rinde al máximo con una afinación completa y precisa.</p>
     </div>
-    <div class="svc-card reveal-l" style="transition-delay:.08s">
+    <div class="svc-card rev" style="transition-delay:.07s">
       <span class="svc-num">02</span>
-      <span class="svc-name">Cambio de Aceite</span>
-      <span class="svc-price">desde $250</span>
-      <p class="svc-desc">Cambio de aceite y filtro con revisión de 20 puntos incluida. Usamos aceites sintéticos y semisintéticos de primera.</p>
+      <span class="svc-name">Frenos</span>
+      <span class="svc-tag">desde $800</span>
+      <p class="svc-desc">Balatas, discos, líquido de frenos. Tus frenos son tu seguridad — los revisamos y reparamos al día.</p>
     </div>
-    <div class="svc-card reveal-l" style="transition-delay:.16s">
+    <div class="svc-card rev" style="transition-delay:.14s">
       <span class="svc-num">03</span>
-      <span class="svc-name">Frenos y Suspensión</span>
-      <span class="svc-price">desde $800</span>
-      <p class="svc-desc">Balatas, discos, amortiguadores y rotulas. Tus frenos son tu seguridad — no los descuides.</p>
+      <span class="svc-name">Suspensión</span>
+      <span class="svc-tag">desde $900</span>
+      <p class="svc-desc">Amortiguadores, rótulas, terminals, alineación y balanceo. Manejo firme y seguro en todo momento.</p>
     </div>
-    <div class="svc-card reveal-l" style="transition-delay:.24s">
+    <div class="svc-card rev" style="transition-delay:.21s">
       <span class="svc-num">04</span>
-      <span class="svc-name">Motor y Transmisión</span>
-      <span class="svc-price">desde $1,500</span>
-      <p class="svc-desc">Reparación mayor de motor, cabezas, empacaduras y cajas automáticas y estándar con garantía escrita.</p>
-    </div>
-    <div class="svc-card reveal-l" style="transition-delay:.32s">
-      <span class="svc-num">05</span>
-      <span class="svc-name">Sistema Eléctrico</span>
-      <span class="svc-price">desde $500</span>
+      <span class="svc-name">Eléctrico</span>
+      <span class="svc-tag">desde $500</span>
       <p class="svc-desc">Diagnóstico y reparación de alternador, marcha, cableado y módulos de control electrónico.</p>
     </div>
-    <div class="svc-card reveal-l" style="transition-delay:.40s">
+    <div class="svc-card rev" style="transition-delay:.28s">
+      <span class="svc-num">05</span>
+      <span class="svc-name">Diagnóstico</span>
+      <span class="svc-tag">desde $200</span>
+      <p class="svc-desc">Lectura completa de códigos OBD2 con equipo de última generación. Identificamos el problema exacto.</p>
+    </div>
+    <div class="svc-card rev" style="transition-delay:.35s">
       <span class="svc-num">06</span>
-      <span class="svc-name">Aire Acondicionado</span>
-      <span class="svc-price">desde $600</span>
-      <p class="svc-desc">Carga de gas, reparación de compresor y revisión completa del sistema de climatización.</p>
+      <span class="svc-name">Cambio de Aceite</span>
+      <span class="svc-tag">desde $250</span>
+      <p class="svc-desc">Aceite y filtro con revisión de 20 puntos incluida. Aceites sintéticos y semisintéticos de primera calidad.</p>
     </div>
   </div>
 </section>
 
-<!-- POR QUÉ NOSOTROS — YELLOW BG -->
-<section id="porque">
-  <div class="reveal">
-    <h2 class="pq-title">¿POR QUÉ<br>NOSOTROS?</h2>
-  </div>
-  <div class="pq-grid">
-    <div class="pq-card reveal">
-      <span class="pq-big-num" data-count="15" data-suffix="">15</span>
-      <span class="pq-name">15 Años de Experiencia</span>
-      <p class="pq-desc">Más de una década y media trabajando en Monterrey. Hemos visto y reparado de todo. Tu auto queda en manos expertas.</p>
+<!-- ─ ACCENT STRIP ─ -->
+<div class="accent-strip or"></div>
+
+<!-- STATS BAR -->
+<section id="stats-bar" aria-label="Estadísticas">
+  <div class="stats-inner">
+    <div class="stat-block rev">
+      <span class="stat-big" data-count="15" data-suffix="">15</span>
+      <span class="stat-lbl">Años de Experiencia</span>
     </div>
-    <div class="pq-card reveal" style="transition-delay:.1s">
-      <span class="pq-big-num">✓</span>
-      <span class="pq-name">Garantía Escrita</span>
-      <p class="pq-desc">Cada reparación viene con garantía por escrito. No cobramos dos veces por lo mismo. Punto.</p>
+    <div class="stat-block rev" style="transition-delay:.1s">
+      <span class="stat-big" data-count="8000" data-suffix="+">8,000+</span>
+      <span class="stat-lbl">Clientes Satisfechos</span>
     </div>
-    <div class="pq-card reveal" style="transition-delay:.2s">
-      <span class="pq-big-num">$0</span>
-      <span class="pq-name">Presupuesto Gratis</span>
-      <p class="pq-desc">Diagnóstico y cotización sin costo. Decidís si proceden — sin presión, sin engaños, sin letras pequeñas.</p>
-    </div>
-    <div class="pq-card reveal" style="transition-delay:.3s">
-      <span class="pq-big-num">★</span>
-      <span class="pq-name">Mecánicos Certificados</span>
-      <p class="pq-desc">Técnicos certificados con formación continua. Herramienta de diagnóstico profesional en cada servicio.</p>
+    <div class="stat-block rev" style="transition-delay:.2s">
+      <span class="stat-big" data-count="24" data-suffix="h">24h</span>
+      <span class="stat-lbl">Diagnóstico Rápido</span>
     </div>
   </div>
 </section>
 
 <!-- PROCESO -->
 <section id="proceso">
-  <div class="reveal" style="text-align:center">
-    <span class="section-label">EL PROCESO</span>
-    <span class="section-sub-label">Simple, rápido, sin sorpresas</span>
+  <div class="section-header rev" style="text-align:center">
+    <p class="section-eyebrow" style="justify-content:center">Simple, rápido, sin sorpresas</p>
+    <span class="section-title">EL <span class="section-title-or">PROCESO</span></span>
   </div>
   <div class="proceso-steps">
-    <div class="proceso-step reveal">
-      <div class="step-circle">1</div>
-      <span class="step-title">TRAES TU AUTO</span>
-      <p class="step-desc">Lléganos en persona o llama para apartar cita. Abierto de lunes a sábado en Monterrey.</p>
+    <div class="proceso-step rev" style="transition-delay:.0s">
+      <span class="step-num">1</span>
+      <div class="step-icon">🚗</div>
+      <span class="step-title">Traes tu auto</span>
+      <p class="step-desc">Lléganos en persona o llama para apartar tu cita. Abierto de lunes a sábado en Naucalpan, Edo. de México.</p>
+      <div class="step-connector"></div>
     </div>
-    <div class="proceso-step reveal" style="transition-delay:.15s">
-      <div class="step-circle">2</div>
-      <span class="step-title">DIAGNÓSTICO</span>
+    <div class="proceso-step rev" style="transition-delay:.15s">
+      <span class="step-num">2</span>
+      <div class="step-icon">🔬</div>
+      <span class="step-title">Diagnóstico</span>
       <p class="step-desc">Revisión completa con equipo computarizado. Te explicamos cada falla con lenguaje claro y te damos presupuesto exacto.</p>
+      <div class="step-connector"></div>
     </div>
-    <div class="proceso-step reveal" style="transition-delay:.3s">
-      <div class="step-circle">3</div>
-      <span class="step-title">REPARADO</span>
-      <p class="step-desc">Tu auto listo en el tiempo acordado con garantía por escrito. Sin sorpresas en la factura.</p>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIOS -->
-<section id="testimonios">
-  <div class="reveal">
-    <span class="section-label">CLIENTES</span>
-    <span class="section-sub-label">Ellos ya confiaron en nosotros</span>
-  </div>
-  <div class="test-grid">
-    <div class="test-card reveal">
-      <span class="test-quote">"</span>
-      <span class="test-stars">★★★★★</span>
-      <p class="test-text">Llevé mi Aveo con un ruido horrible en los frenos — lo repararon el mismo día. El precio fue exactamente lo cotizado. Ya no voy a otro taller.</p>
-      <span class="test-author">Carlos R.</span>
-      <span class="test-car">Chevrolet Aveo 2019</span>
-    </div>
-    <div class="test-card reveal" style="transition-delay:.12s">
-      <span class="test-quote">"</span>
-      <span class="test-stars">★★★★★</span>
-      <p class="test-text">Diagnóstico muy completo y explicaron todo antes de cobrar. El sistema eléctrico de mi Jetta era un desastre — quedó perfecto. 100% recomendados.</p>
-      <span class="test-author">Mariana S.</span>
-      <span class="test-car">VW Jetta 2020</span>
-    </div>
-    <div class="test-card reveal" style="transition-delay:.24s">
-      <span class="test-quote">"</span>
-      <span class="test-stars">★★★★★</span>
-      <p class="test-text">Traigo mi RAM 1500 aquí cada 5,000 km. Siempre puntuales, siempre honestos. En 3 años nunca me han cobrado algo que no necesitara.</p>
-      <span class="test-author">Gerardo L.</span>
-      <span class="test-car">Dodge RAM 1500 2021</span>
+    <div class="proceso-step rev" style="transition-delay:.3s">
+      <span class="step-num">3</span>
+      <div class="step-icon">✅</div>
+      <span class="step-title">Auto Listo</span>
+      <p class="step-desc">Tu auto entregado en el tiempo acordado con garantía por escrito. Sin sorpresas en la factura.</p>
     </div>
   </div>
 </section>
 
-<!-- CTA SECTION — YELLOW BG -->
-<section id="cta-section">
-  <div class="reveal">
-    <h2 class="cta-title">¿ALGO MAL<br>CON TU AUTO?</h2>
+<!-- ─ ACCENT STRIP ─ -->
+<div class="accent-strip"></div>
+
+<!-- DIAGNÓSTICO / TOOL -->
+<section id="diagnostico">
+  <div class="section-header rev">
+    <p class="section-eyebrow">Herramienta gratuita</p>
+    <span class="section-title">DIAGNÓSTICO <span class="section-title-or">RÁPIDO</span></span>
   </div>
-  <div class="cta-btns">
-    <a href="https://wa.me/528112345678?text=Hola!%20Necesito%20servicio%20para%20mi%20auto" class="cta-btn-dark" target="_blank" rel="noopener noreferrer">AGENDA HOY</a>
-    <a href="https://wa.me/528112345678?text=Hola!%20Necesito%20servicio%20para%20mi%20auto" class="cta-btn-wa" target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+  <div class="diag-wrap">
+    <div class="diag-left rev-l">
+      <h3 class="diag-left-title">¿QUÉ LE<br><span>PASA A TU<br>AUTO?</span></h3>
+      <p class="diag-left-desc">Usa nuestro formulario de prediagnóstico. Te contactamos vía WhatsApp con una estimación preliminar antes de que llegues al taller.</p>
+      <ul class="diag-checklist">
+        <li>Sin costo ni compromiso</li>
+        <li>Respuesta en menos de 2 horas</li>
+        <li>Técnico certificado te atiende</li>
+        <li>Presupuesto transparente y escrito</li>
+      </ul>
+    </div>
+    <div class="diag-right rev-r">
+      <h4 class="diag-form-title">Cuéntanos el problema</h4>
+      <form id="diag-form" novalidate>
+        <div class="diag-field">
+          <label for="d-name">Tu nombre</label>
+          <input type="text" id="d-name" placeholder="Ej. Juan García" autocomplete="name">
+        </div>
+        <div class="diag-field">
+          <label for="d-phone">WhatsApp</label>
+          <input type="tel" id="d-phone" placeholder="55 7183 1083" autocomplete="tel">
+        </div>
+        <div class="diag-field">
+          <label for="d-car">Auto (marca, modelo, año)</label>
+          <input type="text" id="d-car" placeholder="Ej. Nissan Versa 2018">
+        </div>
+        <div class="diag-field">
+          <label for="d-service">Servicio de interés</label>
+          <select id="d-service">
+            <option value="">Seleccionar...</option>
+            <option>Afinación</option>
+            <option>Frenos</option>
+            <option>Suspensión</option>
+            <option>Sistema Eléctrico</option>
+            <option>Diagnóstico Computarizado</option>
+            <option>Cambio de Aceite</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="diag-field">
+          <label for="d-desc">Describe el problema</label>
+          <textarea id="d-desc" placeholder="Ej. El carro hace un ruido al frenar..."></textarea>
+        </div>
+        <button type="submit" class="diag-submit">ENVIAR POR WHATSAPP →</button>
+        <div id="diag-result"></div>
+      </form>
+    </div>
   </div>
-  <span class="cta-phone">📞 811 234 5678</span>
-  <span class="cta-addr">Av. Morones Prieto 1500, Monterrey, NL</span>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-header rev">
+    <p class="section-eyebrow">Estamos cerca de ti</p>
+    <span class="section-title">AGENDA TU <span class="section-title-or">CITA</span></span>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-info rev-l">
+      <h3 class="contact-info-title">VISÍTANOS EN<br><span>NAUCALPAN</span></h3>
+      <div class="c-info-block">
+        <span class="c-info-label">Dirección</span>
+        <span class="c-info-val">Av. Lomas Verdes 2400</span>
+        <span class="c-info-sub">Naucalpan de Juárez, Estado de México</span>
+      </div>
+      <div class="c-info-block">
+        <span class="c-info-label">Teléfono / WhatsApp</span>
+        <span class="c-info-val">55 7183 1083</span>
+        <span class="c-info-sub">Respuesta rápida por WhatsApp</span>
+      </div>
+      <div class="c-info-block">
+        <span class="c-info-label">Horario</span>
+        <span class="c-info-val">Lun–Vie 8am–7pm</span>
+        <span class="c-info-sub">Sábado 8am–3pm</span>
+      </div>
+      <a href="https://wa.me/5255718310830?text=Hola!%20Quiero%20agendar%20una%20cita" class="wa-cta-big" target="_blank" rel="noopener noreferrer">
+        💬 Escríbenos por WhatsApp
+      </a>
+    </div>
+    <div class="contact-form-side rev-r">
+      <h4 class="contact-form-title">Agenda en línea</h4>
+      <form id="contact-form" novalidate>
+        <div class="c-field">
+          <label for="c-name">Nombre completo</label>
+          <input type="text" id="c-name" placeholder="Ej. María López" autocomplete="name">
+        </div>
+        <div class="c-field">
+          <label for="c-phone">WhatsApp</label>
+          <input type="tel" id="c-phone" placeholder="55 7183 1083" autocomplete="tel">
+        </div>
+        <div class="c-field">
+          <label for="c-car">Auto</label>
+          <input type="text" id="c-car" placeholder="Marca, modelo, año">
+        </div>
+        <div class="c-field">
+          <label for="c-service">Servicio</label>
+          <select id="c-service">
+            <option value="">Seleccionar servicio...</option>
+            <option>Afinación</option>
+            <option>Frenos</option>
+            <option>Suspensión</option>
+            <option>Sistema Eléctrico</option>
+            <option>Diagnóstico Computarizado</option>
+            <option>Cambio de Aceite</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="c-field">
+          <label for="c-msg">Mensaje adicional (opcional)</label>
+          <textarea id="c-msg" placeholder="Cuéntanos más sobre el problema..."></textarea>
+        </div>
+        <button type="submit" class="c-submit">AGENDAR POR WHATSAPP →</button>
+      </form>
+    </div>
+  </div>
 </section>
 
 <!-- FOOTER -->
@@ -429,39 +1185,38 @@ footer{background:#000;border-top:2px solid var(--bord);padding:60px}
   <div class="footer-grid">
     <div class="footer-brand">
       <div class="brand-mark">
-        <span class="wrench">🔧</span>
-        <span class="brand">MECÁNICA</span>
-        <span class="pro">PRO</span>
+        <span class="brand">MECÁNICA</span><span class="pro">PRO</span>
       </div>
-      <p>Taller automotriz en Monterrey con 15 años de experiencia. Diagnóstico preciso, trabajo honesto y precios justos para todos los autos.</p>
+      <div class="footer-stripe"></div>
+      <p>Taller mecánico en Naucalpan con 15 años de experiencia. Diagnóstico preciso, trabajo honesto y precios justos para todos los autos.</p>
     </div>
     <div class="footer-col">
       <h4>Servicios</h4>
       <ul>
-        <li><a href="#servicios">Diagnóstico Computarizado</a></li>
-        <li><a href="#servicios">Cambio de Aceite</a></li>
-        <li><a href="#servicios">Frenos y Suspensión</a></li>
-        <li><a href="#servicios">Motor y Transmisión</a></li>
+        <li><a href="#servicios">Afinación</a></li>
+        <li><a href="#servicios">Frenos</a></li>
+        <li><a href="#servicios">Suspensión</a></li>
         <li><a href="#servicios">Sistema Eléctrico</a></li>
-        <li><a href="#servicios">Aire Acondicionado</a></li>
+        <li><a href="#servicios">Diagnóstico</a></li>
+        <li><a href="#servicios">Cambio de Aceite</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Contacto</h4>
-      <p class="contact-line"><strong>Dirección</strong><br>Av. Morones Prieto 1500<br>Monterrey, NL</p>
-      <p class="contact-line"><strong>Teléfono</strong><br>811 234 5678</p>
+      <p class="contact-line"><strong>Dirección</strong><br>Av. Lomas Verdes 2400<br>Naucalpan, Edo. de México</p>
+      <p class="contact-line"><strong>Teléfono</strong><br>55 7183 1083</p>
       <p class="contact-line"><strong>Horario</strong><br>Lun–Vie 8am–7pm<br>Sáb 8am–3pm</p>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2026 MecánicaPRO — Monterrey, Nuevo León</p>
+    <p>© 2026 MecánicaPRO — Naucalpan, Estado de México</p>
     <p>Diagnóstico preciso · Trabajo honesto · Precios justos</p>
   </div>
 </footer>
 
 <!-- FLOATING WHATSAPP -->
 <div class="wa-float">
-  <a href="https://wa.me/528112345678?text=Hola!%20Necesito%20servicio%20para%20mi%20auto" class="wa-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+  <a href="https://wa.me/5255718310830?text=Hola!%20Necesito%20servicio%20para%20mi%20auto" class="wa-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp MecánicaPRO">
     💬
     <span class="wa-ring"></span>
   </a>
@@ -472,37 +1227,21 @@ footer{background:#000;border-top:2px solid var(--bord);padding:60px}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <script>
-// ─── SCROLL PROGRESS BAR ────────────────────────────────
+// ─── SCROLL PROGRESS BAR ─────────────────────────────────
 document.addEventListener('scroll', () => {
   const s = document.documentElement;
   document.getElementById('spb').style.width =
     (s.scrollTop / (s.scrollHeight - s.clientHeight) * 100) + '%';
 }, { passive: true });
 
-// ─── GSAP HERO HEADING ──────────────────────────────────
+// ─── GSAP ────────────────────────────────────────────────
 gsap.registerPlugin(ScrollTrigger);
 
-gsap.to('#hw1', {
-  y: 0, opacity: 1,
-  duration: .9, ease: 'power4.out', delay: .2
-});
-gsap.to('#hw2', {
-  y: 0, opacity: 1,
-  duration: .9, ease: 'power4.out', delay: .45
-});
-
-// hero divider + btns + stats
-gsap.fromTo('.hero-divider',
-  { scaleX: 0, transformOrigin: 'left center' },
-  { scaleX: 1, duration: .7, ease: 'power3.out', delay: .85 }
-);
-gsap.fromTo('.hero-btns',
-  { opacity: 0, y: 20 },
-  { opacity: 1, y: 0, duration: .7, ease: 'power2.out', delay: 1.25 }
-);
-gsap.fromTo('.hero-stats',
-  { opacity: 0 },
-  { opacity: 1, duration: .8, ease: 'power2.out', delay: 1.45 }
+// Hero heading stagger (elements already have .rev — just animate opacity/y
+// using GSAP for hero initial load since IntersectionObserver fires immediately
+gsap.fromTo('.hero-left .hero-h1 .rev',
+  { y: 40, opacity: 0 },
+  { y: 0, opacity: 1, stagger: .1, duration: .8, ease: 'power4.out', delay: .15 }
 );
 
 // ─── HERO TYPEWRITER ─────────────────────────────────────
@@ -510,19 +1249,21 @@ gsap.fromTo('.hero-stats',
   const el = document.getElementById('hero-sub-tw');
   if (!el) return;
   const originalHTML = el.innerHTML;
-  // extract plain text preserving <strong> tags
-  // We'll retype the full innerHTML char-by-char using a text-based approach
-  // Build array of tokens: {type:'tag',val:'<strong>'} or {type:'char',val:'D'}
   const tokens = [];
   let tmp = '';
   let inTag = false;
   for (let i = 0; i < originalHTML.length; i++) {
     const ch = originalHTML[i];
-    if (ch === '<') { if (tmp) tokens.push({t:'c',v:tmp}); tmp='<'; inTag=true; }
-    else if (ch === '>' && inTag) { tmp+=ch; tokens.push({t:'g',v:tmp}); tmp=''; inTag=false; }
-    else { tmp+=ch; }
+    if (ch === '<') {
+      if (tmp) tokens.push({ t: 'c', v: tmp });
+      tmp = '<'; inTag = true;
+    } else if (ch === '>' && inTag) {
+      tmp += ch;
+      tokens.push({ t: 'g', v: tmp });
+      tmp = ''; inTag = false;
+    } else { tmp += ch; }
   }
-  if (tmp) tokens.push({t:'c',v:tmp});
+  if (tmp) tokens.push({ t: 'c', v: tmp });
 
   el.innerHTML = '';
   el.style.opacity = '1';
@@ -530,17 +1271,16 @@ gsap.fromTo('.hero-stats',
   cursor.className = 'tw-cursor';
   el.appendChild(cursor);
 
-  // Flatten to steps: each step either inserts a full tag or one char
   const steps = [];
   tokens.forEach(tok => {
-    if (tok.t === 'g') { steps.push({tag:true, v:tok.v}); }
-    else { for (const c of tok.v) steps.push({tag:false, v:c}); }
+    if (tok.t === 'g') { steps.push({ tag: true, v: tok.v }); }
+    else { for (const c of tok.v) steps.push({ tag: false, v: c }); }
   });
 
   let built = '';
   let si = 0;
-  const DELAY = 1500; // ms before start
-  const PER_CHAR = 30; // ms per char
+  const DELAY = 1200;
+  const PER_CHAR = 28;
 
   setTimeout(function typeNext() {
     if (si >= steps.length) { cursor.remove(); return; }
@@ -552,27 +1292,28 @@ gsap.fromTo('.hero-stats',
   }, DELAY);
 })();
 
-// ─── SCROLL REVEAL — .rev variants ──────────────────────
+// ─── SCROLL REVEAL (IntersectionObserver) ────────────────
 const revObs = new IntersectionObserver(entries => {
   entries.forEach(en => {
-    if (en.isIntersecting) en.target.classList.add('on');
+    if (en.isIntersecting) {
+      en.target.classList.add('on');
+      revObs.unobserve(en.target);
+    }
   });
 }, { threshold: .1 });
-document.querySelectorAll('.reveal,.reveal-l,.rev,.rev-l,.rev-r').forEach(el => revObs.observe(el));
+document.querySelectorAll('.rev, .rev-l, .rev-r').forEach(el => revObs.observe(el));
 
-// ─── GSAP SCROLL: SERVICE CARDS (staggered) ─────────────
+// ─── GSAP: SERVICE CARDS stagger ─────────────────────────
 gsap.utils.toArray('.svc-card').forEach((card, i) => {
-  card.style.animationDelay = (i * 100) + 'ms';
   gsap.fromTo(card,
-    { x: -30, opacity: 0 },
+    { y: 30, opacity: 0 },
     {
-      x: 0, opacity: 1,
-      duration: .65,
-      ease: 'power2.out',
-      delay: i * 0.1,
+      y: 0, opacity: 1,
+      duration: .6, ease: 'power2.out',
+      delay: i * 0.08,
       scrollTrigger: {
         trigger: card,
-        start: 'top 85%',
+        start: 'top 86%',
         toggleActions: 'play none none none'
       }
     }
@@ -590,14 +1331,14 @@ gsap.utils.toArray('.svc-card').forEach((card, i) => {
       const y = e.clientY - r.top;
       const cx = r.width / 2;
       const cy = r.height / 2;
-      const rotY =  ((x - cx) / cx) * 10;
-      const rotX = -((y - cy) / cy) * 10;
-      card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateX(6px)`;
+      const rotY =  ((x - cx) / cx) * 6;
+      const rotX = -((y - cy) / cy) * 6;
+      card.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
       card.style.transition = 'transform .1s ease';
     });
     card.addEventListener('mouseleave', () => {
       card.style.transform = '';
-      card.style.transition = 'all .3s';
+      card.style.transition = 'border-color .25s, box-shadow .25s';
     });
   });
 })();
@@ -610,16 +1351,13 @@ let lastY = 0;
 
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
-  // hide/show nav
   if (y > lastY && y > 100) {
     navEl.style.transform = 'translateY(-100%)';
-    navEl.style.transition = 'transform .35s';
   } else {
     navEl.style.transform = 'translateY(0)';
   }
   lastY = y;
 
-  // active link spy
   let current = '';
   sections.forEach(sec => {
     if (y >= sec.offsetTop - 120) current = sec.id;
@@ -661,7 +1399,9 @@ const rplStyle = document.createElement('style');
 rplStyle.textContent = '@keyframes rpl{to{transform:scale(4);opacity:0}}';
 document.head.appendChild(rplStyle);
 
-document.querySelectorAll('.btn-primary,.btn-outline,.btn-green,.cta-btn-dark,.cta-btn-wa,.nav-cta').forEach(btn => {
+document.querySelectorAll(
+  '.btn-primary,.btn-outline,.btn-wa,.nav-cta,.diag-submit,.c-submit,.wa-cta-big'
+).forEach(btn => {
   if (getComputedStyle(btn).position === 'static') btn.style.position = 'relative';
   btn.style.overflow = 'hidden';
   btn.addEventListener('click', e => {
@@ -670,15 +1410,63 @@ document.querySelectorAll('.btn-primary,.btn-outline,.btn-green,.cta-btn-dark,.c
     const d = Math.max(rect.width, rect.height);
     r.style.cssText = `
       position:absolute;width:${d}px;height:${d}px;
-      border-radius:50%;background:rgba(255,255,255,.18);
+      border-radius:50%;background:rgba(255,255,255,.2);
       left:${e.clientX - rect.left - d/2}px;
       top:${e.clientY - rect.top - d/2}px;
       transform:scale(0);pointer-events:none;
-      animation:rpl .5s cubic-bezier(.4,0,.2,1) forwards;
+      animation:rpl .55s cubic-bezier(.4,0,.2,1) forwards;
     `;
     btn.appendChild(r);
-    setTimeout(() => r.remove(), 550);
+    setTimeout(() => r.remove(), 600);
   });
+});
+
+// ─── DIAGNOSTIC FORM → WhatsApp ──────────────────────────
+document.getElementById('diag-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name    = document.getElementById('d-name').value.trim();
+  const phone   = document.getElementById('d-phone').value.trim();
+  const car     = document.getElementById('d-car').value.trim();
+  const service = document.getElementById('d-service').value;
+  const desc    = document.getElementById('d-desc').value.trim();
+  if (!name || !phone) {
+    const res = document.getElementById('diag-result');
+    res.style.display = 'block';
+    res.textContent = 'Por favor ingresa tu nombre y número de WhatsApp.';
+    return;
+  }
+  const msg = encodeURIComponent(
+    `Hola MecánicaPRO! Quiero un prediagnóstico.\n` +
+    `*Nombre:* ${name}\n` +
+    `*Auto:* ${car || 'No especificado'}\n` +
+    `*Servicio:* ${service || 'No especificado'}\n` +
+    `*Problema:* ${desc || 'Sin descripción'}\n` +
+    `*Teléfono:* ${phone}`
+  );
+  window.open(`https://wa.me/5255718310830?text=${msg}`, '_blank', 'noopener,noreferrer');
+});
+
+// ─── CONTACT FORM → WhatsApp ─────────────────────────────
+document.getElementById('contact-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const name    = document.getElementById('c-name').value.trim();
+  const phone   = document.getElementById('c-phone').value.trim();
+  const car     = document.getElementById('c-car').value.trim();
+  const service = document.getElementById('c-service').value;
+  const msg_add = document.getElementById('c-msg').value.trim();
+  if (!name || !phone) {
+    alert('Por favor ingresa tu nombre y teléfono.');
+    return;
+  }
+  const msg = encodeURIComponent(
+    `Hola MecánicaPRO! Quiero agendar una cita.\n` +
+    `*Nombre:* ${name}\n` +
+    `*Auto:* ${car || 'No especificado'}\n` +
+    `*Servicio:* ${service || 'No especificado'}\n` +
+    `*Mensaje:* ${msg_add || '-'}\n` +
+    `*Teléfono:* ${phone}`
+  );
+  window.open(`https://wa.me/5255718310830?text=${msg}`, '_blank', 'noopener,noreferrer');
 });
 </script>
 </body>
